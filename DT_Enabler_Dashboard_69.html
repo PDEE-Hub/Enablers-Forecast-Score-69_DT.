@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBE Enablers — DT การพัฒนาเทคโนโลยีดิจิทัล ปี 2569</title>
+<style>
+
+.top-nav{background:#0d1b26;color:#e8e4d8;padding:6px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.top-nav a{color:#7a9ab3;text-decoration:none;font-size:12px;transition:color .15s;}
+.top-nav a:hover{color:#e8e4d8;}
+.top-nav h1{font-size:12px;font-weight:600;color:#c5dce8;margin-left:2px;}
+.top-nav .sep{color:#2a4a5a;font-size:12px;}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sarabun','Segoe UI',sans-serif;font-size:15px;background:#F4F8FB;color:#1E293B;}
+.page-hd{background:#1c2b3a;color:#e8e4d8;padding:8px 16px;display:flex;align-items:center;gap:10px;}
+.page-hd h1{font-size:13px;font-weight:600;}
+.page-hd .sub{font-size:11px;color:#8fa3b3;margin-left:auto;}
+.dim-tabs{background:#16222e;padding:4px 12px;display:flex;gap:6px;overflow-x:auto;}
+.dtab{font-size:11px;font-weight:600;padding:4px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;border:none;transition:background .15s;}
+.dtab-hcm{background:#2d4a62;color:#9fc8e0;}.dtab-hcm.active{background:#4a8ab0;color:#fff;}
+.dtab-im{background:#3a2d5a;color:#c8b8f0;}.dtab-im.active{background:#6a3ab0;color:#fff;}
+.dtab-sp{background:#1a3a1a;color:#a8d8a8;}.dtab-sp.active{background:#2e7d32;color:#fff;}
+.dtab-ia{background:#3a1a10;color:#e8c870;}.dtab-ia.active{background:#9a5210;color:#fff;}
+.dtab-cm{background:#0a4a4a;color:#a0e8e0;}.dtab-cm.active{background:#0a8a7a;color:#fff;}
+.dtab-dt{background:#0d3a4a;color:#90d0e8;}.dtab-dt.active{background:#0a7a9a;color:#fff;}
+.left-hd-dt{background:#0d3a4a;color:#90d0e8;}
+.sub.focus-dt{background:#e0f4fb;}.sub.focus-dt .sub-target{border-left-color:#0a7a9a;}
+.dt-int-link{display:inline-flex;align-items:center;gap:3px;font-size:9px;padding:1px 7px;border-radius:8px;background:#b0e0f0;color:#0a2840;font-weight:600;cursor:pointer;flex-shrink:0;}
+.dt-ext-link{display:inline-flex;align-items:center;gap:3px;font-size:9px;padding:1px 7px;border-radius:8px;background:#90c8e0;color:#0a2048;font-weight:600;text-decoration:none;flex-shrink:0;}
+.dt-sc-note{font-size:10px;color:#0a3050;font-weight:600;margin:6px 0 4px;padding:4px 8px;background:#d8eef8;border-radius:4px;}
+input.dt-cb{accent-color:#0d3a4a;}
+.left-hd-cm{background:#0a4a4a;color:#a0e8e0;}
+.sub.focus-cm{background:#e0f8f5;}.sub.focus-cm .sub-target{border-left-color:#0a8a7a;}
+.cm-link-pill{display:inline-flex;align-items:center;gap:3px;font-size:9px;padding:1px 7px;border-radius:8px;background:#b0eee8;color:#0a4a4a;font-weight:600;text-decoration:none;flex-shrink:0;}
+.cm-link-icon{font-size:9px;padding:1px 5px;border-radius:4px;background:#b0eee8;color:#0a4a4a;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.dim-hd{background:#fff;border-bottom:1px solid #ddd;padding:7px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.chip{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap;}
+.cn{background:#e0ddd4;color:#444;}.ct{background:#c5e8d5;color:#0a4a2a;}.cr{background:#fcd0cc;color:#7a1010;}
+.layout{display:grid;grid-template-columns:48% 52%;height:calc(100vh - 94px);overflow:hidden;}
+.left{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid #d4d0c8;}
+.left-hd{padding:6px 12px;font-size:11px;font-weight:600;color:#c5dce8;display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.left-hd-hcm{background:#2d4a62;}.left-hd-im{background:#3a2d5a;color:#c8b8f0;}
+.left-hd-sp{background:#1a3a1a;color:#a8d8a8;}
+.left-hd-ia{background:#3a1a10;color:#e8c870;}
+.left-body{flex:1;overflow-y:auto;}
+.grp{display:flex;align-items:center;gap:5px;padding:5px 10px;background:#edeae0;border-bottom:1px solid #ccc;position:sticky;top:0;z-index:2;}
+.grp-id{font-size:11px;font-weight:700;color:#555;min-width:14px;}
+.grp-name{font-size:11px;font-weight:600;flex:1;color:#222;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.grp-wt{font-size:10px;color:#888;white-space:nowrap;}
+.grp-scores{display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.sub{display:flex;align-items:stretch;cursor:pointer;transition:background .12s;}
+.sub:hover{background:#f0ede4;}.sub.focus-hcm{background:#e6f1fb;}.sub.focus-im{background:#f0ebfc;}
+.sub.focus-sp{background:#eaf5ea;}
+.sub.focus-ia{background:#fdf5e8;}
+.sub.focus-hcm .sub-target{border-left-color:#1a7a4a;}.sub.focus-im .sub-target{border-left-color:#6a3ab0;}
+.sub.focus-sp .sub-target{border-left-color:#2e7d32;}
+.sub.focus-ia .sub-target{border-left-color:#9a5210;}
+.sub-left{display:flex;align-items:center;padding:6px 6px 6px 20px;flex:1;min-width:0;}
+.sub-meta{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;min-width:0;}
+.sub-num{font-size:10px;color:#888;flex-shrink:0;}.sub-wt{font-size:10px;color:#999;flex-shrink:0;}
+.sub-now{font-size:10px;color:#555;flex-shrink:0;}.sub-name{font-size:11px;color:#1a1a1a;flex:1;min-width:0;}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dg{background:#1a9a50;}.da{background:#e8a020;}.dr{background:#d04030;}
+.sub-target{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px 8px;flex-shrink:0;border-left:2px solid #d4d0c8;width:88px;min-width:88px;}
+.target-lbl{font-size:9px;color:#888;}
+.target-inp{width:72px;font-size:9px;font-weight:700;padding:3px 5px;border:1px solid #ccc;border-radius:4px;background:#fff;color:#1a1a1a;text-align:center;font-family:inherit;}
+.target-inp:focus{outline:none;}
+.sstrip{padding:3px 10px 3px 20px;border-bottom:1px solid #e8e4dc;display:flex;align-items:center;gap:7px;background:#faf9f6;cursor:pointer;}
+.sstrip:hover{background:#f0ede4;}
+.sbadge{font-size:10px;padding:1px 8px;border-radius:8px;font-weight:600;white-space:nowrap;}
+.s0{background:#e0ddd8;color:#666;}.s1{background:#fde8b0;color:#7a4400;}.s2{background:#c5e8d5;color:#0a4a2a;}
+.snote{font-size:10px;color:#999;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cl-wrap{padding:8px 12px;border-top:2px solid #1c2b3a;background:#f8f6f0;flex-shrink:0;}
+.cl-title{font-size:10px;font-weight:700;color:#1c2b3a;margin-bottom:6px;}
+.cl-item{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:#333;margin-bottom:5px;line-height:1.45;}
+.cl-item input{flex-shrink:0;margin-top:1px;accent-color:#1c2b3a;}
+.cl-note{font-size:10px;color:#888;padding-top:5px;border-top:1px solid #ccc;margin-top:3px;}
+.total{display:flex;align-items:center;gap:7px;padding:7px 12px;background:#1c2b3a;color:#e8e4d8;flex-shrink:0;}
+.total-lbl{font-size:11px;font-weight:600;flex:1;}.total-note{font-size:10px;color:#7a92a5;}
+.right{display:flex;flex-direction:column;overflow:hidden;background:#fff;}
+.right-body{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+.frame{border-bottom:1px solid #e0ddd4;}
+.frame-hd{padding:6px 12px;font-size:11px;font-weight:600;border-bottom:1px solid rgba(0,0,0,.08);display:flex;align-items:center;gap:6px;}
+.frame-bd{padding:8px 12px;font-size:11px;line-height:1.6;}
+.ftag{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;}
+.fa-hd{background:#fee8e4;}.fa-tag{background:#fcc8c0;color:#7a1010;}
+.fb-hd{background:#e4f5ea;}.fb-tag{background:#bde8cc;color:#0a4a20;}
+.fc-hd{background:#f5f5e4;}.fc-tag{background:#e0e0b0;color:#4a4a00;}
+.fd-hd{background:#e8eef5;}.fd-tag{background:#c0d0e8;color:#102848;}
+.fe-hd{background:#ede8f8;}.fe-tag{background:#c4b0e8;color:#2a1060;}
+.box{border-radius:5px;padding:7px 10px;margin-bottom:5px;font-size:11px;line-height:1.55;}
+.box-red{background:#fff0ee;color:#7a1010;}.box-teal{background:#edf8f2;color:#0a4a20;}.box-gray{background:#f4f3ee;color:#444;}
+.match-row{display:flex;align-items:flex-start;gap:6px;font-size:11px;padding:3px 0;}
+.m-ok{color:#1a7a4a;}.m-no{color:#c03020;}
+.m-lvl{font-size:10px;padding:1px 6px;border-radius:5px;white-space:nowrap;margin-left:auto;}
+.doc-row{display:flex;align-items:flex-start;gap:7px;font-size:11px;color:#333;padding:4px 0;border-bottom:1px solid #eee;}
+.doc-row:last-child{border-bottom:none;}
+.doc-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;margin-top:3px;}
+.doc-new{background:#b0c8e8;}
+.doc-status{font-size:10px;padding:1px 6px;border-radius:5px;white-space:nowrap;margin-left:auto;flex-shrink:0;}
+
+.dtab-sm{background:#2e1f0a;color:#e8c890;}.dtab-sm.active{background:#8a5010;color:#fff;}
+.left-hd-sm{background:#2e1f0a;color:#e8c890;}
+.sub.focus-sm{background:#fdf5e4;}.sub.focus-sm .sub-target{border-left-color:#8a5010;}
+.sm-sim{padding:6px 12px;background:#fafaf5;border-bottom:1px solid #e0ddd0;}
+.sm-sim-hd{font-size:10px;font-weight:700;color:#5a3a00;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.sm-lvl-row{border:1px solid #e0dcd0;border-radius:6px;margin-bottom:6px;overflow:hidden;transition:opacity .2s;}
+.sm-lvl-row.blocked{opacity:.45;pointer-events:none;}
+.sm-lvl-hd{display:flex;align-items:center;gap:6px;padding:5px 8px;background:#f4f0e8;cursor:pointer;}
+.sm-lvl-num{font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;background:#7a4a00;color:#fff;flex-shrink:0;}
+.sm-lvl-desc{font-size:10px;color:#444;flex:1;line-height:1.4;display:flex;align-items:center;gap:5px;}
+.lvl-kt{font-size:10px;font-weight:600;color:#334155;}
+.lvl-toggle{background:none;border:none;cursor:pointer;font-size:10px;color:#64748b;padding:0 2px;line-height:1;transition:transform .2s;}
+.lvl-toggle.open{transform:rotate(180deg);}
+.sm-lvl-detail{padding:7px 10px;background:#f8fafc;border-top:1px dashed #cbd5e1;font-size:11px;color:#334155;line-height:1.6;display:none;}
+.sm-lvl-detail.open{display:block;}
+.sm-lvl-score{font-size:11px;font-weight:700;color:#1c2b3a;flex-shrink:0;}
+.sm-lvl-body{padding:6px 8px 8px;background:#fff;border-top:1px solid #ede8d8;}
+.sm-sect-lbl{font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin:6px 0 4px;}
+.sm-req-item{display:flex;align-items:flex-start;gap:5px;font-size:10px;color:#333;margin-bottom:3px;line-height:1.4;}
+.sm-req-item input[type=checkbox]{flex-shrink:0;margin-top:1px;accent-color:#8a5010;}
+.sm-dim-row{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;}
+.sm-radio-grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.sm-radio-grp label{font-size:10px;color:#333;display:flex;align-items:center;gap:3px;cursor:pointer;}
+.sm-radio-grp input[type=radio]{accent-color:#8a5010;}
+.sm-frac-items{display:flex;flex-direction:column;gap:2px;}
+.sm-lvl-pass{display:inline-block;font-size:9px;padding:1px 6px;border-radius:5px;font-weight:600;}
+.sm-pass{background:#51BF8E;color:#0D3D26;}.sm-fail{background:#FF6766;color:#fff;}.sm-skip{background:#e0ddd8;color:#555;}
+.sm-total-bar{display:flex;align-items:center;gap:8px;padding:6px 8px;background:#f4f0e8;border-radius:5px;margin-top:4px;}
+.sm-total-lbl{font-size:10px;color:#555;flex:1;}
+.sm-raw{font-size:13px;font-weight:700;color:#1c2b3a;}
+.sm-wt{font-size:10px;color:#888;}
+.sm-scope-box{background:#fffbf0;border-left:3px solid #c47020;border-radius:0 5px 5px 0;padding:6px 9px;font-size:10px;line-height:1.5;color:#333;margin-bottom:6px;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#f0ede4;}::-webkit-scrollbar-thumb{background:#b4b0a8;border-radius:3px;}
+
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a href="index.html">← หน้าหลัก</a>
+  <span class="sep">|</span>
+  <h1>ด้านที่ 6 · HCM — การบริหารทุนมนุษย์ (15%)</h1>
+</div>
+
+<div class="dim-hd">
+  <span id="dimTitle" style="font-size:13px;font-weight:600;"></span>
+  <span class="chip cn" id="dimOrig"></span>
+  <span style="color:#999;font-size:12px;">→</span>
+  <span class="chip ct" id="totalChip">คาดการณ์ —</span>
+  <span style="font-size:11px;font-weight:600;margin-left:auto;" id="deltaChip"></span>
+</div>
+
+<div class="layout">
+  <div class="left">
+    <div class="left-hd left-hd-hcm" id="leftHd">
+      <span style="font-size:10px;padding:1px 7px;border-radius:7px;font-weight:700;background:#4a7a9a;color:#fff;">HCM</span>
+      &nbsp;Target Score Simulator &amp; Action Checklist
+    </div>
+    <div class="left-body" id="leftBody"></div>
+    <div class="cl-wrap">
+      <div class="cl-title" id="clTitle">เลือก sub-item เพื่อดู Action Checklist</div>
+      <div id="clItems"></div>
+      <div class="cl-note">คลิก sub-item → checklist และ panel ขวาอัปเดตตาม</div>
+    </div>
+    <div class="total">
+      <span class="total-lbl" id="totalLbl">คะแนนรวม</span>
+      <span class="total-note">sub → ข้อ → ด้าน</span>
+      <span class="chip cn" style="font-size:11px;" id="totalOrig"></span>
+      <span style="font-size:13px;color:#7a92a5;">→</span>
+      <span class="chip ct" style="font-size:13px;font-weight:700;" id="totalFooter">—</span>
+      <span style="font-size:11px;color:#5fcf8a;font-weight:700;" id="deltaFooter"></span>
+    </div>
+  </div>
+  <div class="right">
+    <div class="right-body" id="rightBody">
+      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:13px;">
+        คลิก sub-item ด้านซ้ายเพื่อดูรายละเอียด
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Single-dim: DT ─────────────────────────────────────────────────
+const DATA = { dt: {
+  dimId:"4", dimName:"DT — การพัฒนาเทคโนโลยีดิจิทัล", orig:2.7565, color:"dt",
+  subs:[
+  {id:"1.1",grp:"1",gname:"การกำกับดูแล DT และแผนปฏิบัติการดิจิทัล",gw:25,gs68:2.75,name:"กำหนดกรอบทิศทางการกำกับดูแล DT (Digital Governance)",w:12.5,s68:2.75,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กระบวนการกำกับดูแลด้านเทคโนโลยีดิจิทัลอย่างเป็นระบบ สามารถทำซ้ำได้ (Repeatable) และเป็นมาตรฐาน (Standardized)","กำหนดบทบาทหน้าที่ชัดเจน ครอบคลุมการกำกับดูแลทรัพยากร การดำเนินงานโปร่งใส และกำกับดูแลความเสี่ยงด้านดิจิทัล","เริ่มมีการพยายามกำหนดการวัดและประเมินผลของกระบวนการ"],
+  results:["(L1-2) มีนโยบาย คู่มือกระบวนการกำกับดูแล โครงสร้างการลงทุนด้านดิจิทัล และนโยบายการประเมินความคุ้มค่า","(L3) มีการประเมินการรับรู้ของผู้มีส่วนได้ส่วนเสีย สื่อสารผ่านช่องทาง Line 'ทันข่าวท่าเรือ'","(L4) กำหนดการวัด ติดตาม วิเคราะห์ ตัววัดผลลัพธ์ (Outcome) และนำเสนอต่อคณะกรรมการฯ","(L5) นำผลลัพธ์เข้าสู่กระบวนการทบทวนปรับปรุงกระบวนการกำกับดูแลให้สอดคล้องกับระเบียบและข้อบังคับ"],
+  gaps:["คอขวดที่ Level 3: แม้มี RACI Chart และแผนสื่อสาร แต่ TRIS มองว่ายังขาดการนำไปปฏิบัติใช้จริง และการสื่อสารวัดผลไม่ได้ตามเป้าหมายเชิงประจักษ์","คอขวดที่ Level 4: เอกสารตัวชี้วัดถูกตีความว่าเป็นเพียงผลผลิต (Output) ยังไม่สะท้อนผลลัพธ์เชิงคุณค่า (Outcome) — คะแนนถูกปัดตกมาที่ 2.7500"],
+  actions:["ปรับ KPIs ให้เป็น Outcome เช่น เปลี่ยนจาก 'มีการจัดทำคู่มือเสร็จกี่เล่ม' เป็น 'กระบวนการช่วยลดระยะเวลาการทำงานหรือลดความผิดพลาดได้กี่เปอร์เซ็นต์'","ปรับแผนสื่อสาร: นำ RACI Chart มาใช้จริง เลือกช่องทางให้เหมาะกับกลุ่มเป้าหมาย ตั้งเป้าหมายการรับรู้ เช่น 'ร้อยละ 90 ของผู้มีส่วนได้ส่วนเสียต้องเข้าใจนโยบาย'"],
+  docs:["เอกสารหลักฐานการนำกระบวนการไปปฏิบัติ (Implementation Evidence): รายงานผลการดำเนินงานของกระบวนการที่นำไปใช้จริงในแผนกต่างๆ นอกเหนือจากฝ่าย IT","แบบสรุปผลการประเมินการรับรู้เทียบกับเป้าหมาย: สรุปแบบสำรวจความเข้าใจของผู้มีส่วนได้ส่วนเสีย วิเคราะห์กลุ่มที่รับรู้ต่ำกว่าเป้า พร้อมแผนสื่อสารซ่อมแซม","รายงานสรุปตัววัดผลลัพธ์ (Outcome Report): แสดงให้เห็นว่าการกำกับดูแลด้านดิจิทัลสร้างผลตอบแทนทางธุรกิจหรือเพิ่มขีดความสามารถของบุคลากรอย่างไร"],
+  bp:["ทั้ง กทท. รฟม. และ กทพ. มีคะแนนเท่ากันที่ 2.7500 และได้รับข้อเสนอแนะเหมือนกันจาก TRIS ว่า 'มีกระบวนการแล้วแต่ขาด Implementation' และ 'ตัวชี้วัดยังเป็น Output ไม่ใช่ Outcome' — ใครพิสูจน์ Implementation ได้ก่อนจะก้าวข้ามระดับ 3 ได้"]},
+  {id:"1.2",grp:"1",gname:"การกำกับดูแล DT และแผนปฏิบัติการดิจิทัล",gw:25,gs68:2.75,name:"แผนปฏิบัติการดิจิทัลระยะ 3-5 ปี (Digital Roadmap)",w:12.5,s68:2.75,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการจัดทำแผนปฏิบัติการดิจิทัลและแผนประจำปีอย่างเป็นระบบ สามารถทำซ้ำได้และเป็นมาตรฐาน","แผนมีความเชื่อมโยงกับแผนวิสาหกิจและนโยบายต่างๆ อย่างชัดเจน","มีการวิเคราะห์ผู้มีส่วนได้ส่วนเสีย ทำแผนสื่อสาร และมีการประเมินผลการรับรู้","เริ่มมีการแสดงรายละเอียดแผนครอบคลุม Digital Transformation ทั้งด้านกระบวนการ บุคลากร เทคโนโลยี"],
+  results:["(L1-2) มีคู่มือปฏิบัติงานการทำแผน แผนดิจิทัล 68-70 เชื่อมโยงปัจจัยนำเข้า (SWOT, แผนวิสาหกิจ, แผนแม่บทต่างๆ) อย่างครบถ้วน","(L3) มีการวิเคราะห์ผู้มีส่วนได้ส่วนเสีย (RACI) แผนสื่อสาร ประเมินการรับรู้ และระบุว่าได้นำแผนไปปฏิบัติผ่านโครงการ เช่น Digital Twin LCP","(L4-5) มีการกำหนดการวัด ติดตาม วิเคราะห์ตัววัดผลลัพธ์ (Outcome) และนำผลลัพธ์เข้าสู่กระบวนการทบทวนเพื่อปรับปรุงแผน"],
+  gaps:["หลักฐาน Implementation ยังไม่สะท้อนภาพรวมทั้งองค์กร และเป้าหมายส่วนใหญ่ยังไม่เป็นแบบ SMART หรือไม่สะท้อน Outcome ที่แท้จริง","จุดตาย: แผน Roadmap ขาดความเชื่อมโยงกับมิติของ 'คน' (HR) ซึ่งเป็นข้อต่อสำคัญในการทำ Digital Transformation — TRIS เรียก 'แผนทิ้งคนไว้ข้างหลัง'"],
+  actions:["บูรณาการแผน DT ร่วมกับ HR อย่างใกล้ชิด: ต้องระบุว่าโครงการดิจิทัลแต่ละโครงการส่งผลกระทบต่ออัตรากำลังอย่างไร และมีแผน Upskill/Reskill รองรับ","ตั้งเป้าหมายแบบ SMART: ตัวชี้วัดต้องเฉพาะเจาะจง วัดได้ ทำได้จริง มีกรอบเวลาชัดเจน","ยกระดับการประเมินผลสื่อสาร: เปลี่ยนจากวัด 'จำนวนคนที่รับทราบ' ไปเป็นวัด 'ร้อยละพนักงานที่เข้าใจบทบาทตนเองในแผน Digital Roadmap'"],
+  docs:["แผนบริหารจัดการผลกระทบด้านบุคลากร (HR Impact & Mitigation Plan): จัดทำร่วมกับฝ่าย HR แสดงการวางแผนกำลังคน การโยกย้าย และแผน Upskill/Reskill","หลักฐานการประเมิน 'ประสิทธิผล' ของกระบวนการจัดทำแผน: รายงานแสดงว่าแผนถูกนำไปใช้จริงและประสบความสำเร็จกี่เปอร์เซ็นต์ อะไรคือคอขวด","รายงานผลสัมฤทธิ์เชิงประจักษ์ (Implementation Report): สถิติหรือ Use Case แสดงว่ากระบวนการดิจิทัลทั่วองค์กรสร้าง Outcome อะไรให้ กทท. บ้าง"],
+  bp:["ทั้ง 3 องค์กรได้คะแนนเท่ากันที่ 2.7500 และติดปัญหาเดียวกัน: 'ต้องประเมินประสิทธิภาพการสื่อสารอย่างครอบคลุม' และ 'ยังไม่พบหลักฐาน Implementation ที่ชัดเจน' — ใครโชว์หลักฐาน Implementation รวมมิติ HR ได้ก่อนจะเป็นผู้นำกลุ่ม"]},
+  {id:"2.1",grp:"2",gname:"การนำเทคโนโลยีดิจิทัลมาปรับใช้ทั่วองค์กร (Digital Transformation)",gw:25,gs68:2.166,name:"การวิเคราะห์และจัดทำสถาปัตยกรรมองค์กร (Enterprise Architecture)",w:9,s68:2.166,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการวิเคราะห์และจัดทำ EA แสดงภาพปัจจุบัน (As-Is) และอนาคต (To-Be)","EA ครอบคลุมครบ 5 ด้าน: Business, Data, Application, Infrastructure และ Security Architecture","เริ่มมีการกำหนดแนวทางการประเมินประสิทธิผลและความคุ้มค่าของการนำ DT มาปรับใช้"],
+  results:["(L1-2) มีคู่มือ EA As-Is และ To-Be ครบทั้ง 5 มิติ","(L3-5) ระบุว่ามีการกำหนดการวัด ติดตาม วิเคราะห์ตัววัดผลลัพธ์ (Outcome) และนำผลลัพธ์เข้าสู่กระบวนการทบทวนเพื่อปรับปรุงและทำนวัตกรรม"],
+  gaps:["กทท. สอบผ่านแค่ L1-2 (มีเอกสาร As-Is/To-Be) — ตกใน L3 เพราะ EA ยังเป็นแค่ 'กระดาษพิมพ์เขียว' ไม่ได้บังคับใช้กับโครงการ IT จริง","ขาดรายละเอียดผลลัพธ์แบบองค์รวม (People, Process, Technology) โดยเฉพาะมิติ 'คน' เช่น Upskill/Reskill","ขาดการประเมินมูลค่า (Public Value และ Business Value) เชิงตัวเลข"],
+  actions:["บังคับใช้ EA กับทุกโครงการ IT: ตั้งกฎเกณฑ์ให้ทุกโครงการดิจิทัลต้องผ่าน EA Compliance ก่อนอนุมัติ","วัดผลลัพธ์ใน 3 มิติ (PPT): ตัวชี้วัดโครงการต้องวัดว่ากระบวนการ (Process) ไร้รอยต่อขึ้นอย่างไร และคน (People) ได้รับการ Upskill/Reskill อย่างไร","เน้นการสร้าง Public Value และ Business Value: แปลงผลลัพธ์ระบบดิจิทัลออกมาเป็นตัวเลขทางเศรษฐศาสตร์และการเพิ่มขีดความสามารถ"],
+  docs:["EA Compliance Checklist: เอกสาร/รายงานการพิจารณาอนุมัติโครงการ IT โดยอิงจากกรอบ EA เพื่อพิสูจน์ว่า EA ถูกนำไปใช้คัดกรองโครงการจริง","Digital Transformation Outcome Report: รายงานผลสัมฤทธิ์ที่มีสถิติครบทั้ง 3 ด้าน (People, Process, Tech) รวมถึงข้อมูลการ Upskill/Reskill พนักงาน","Value Realization Report: แสดง Public Value (ลดเวลาประชาชน/ผู้ประกอบการ) และ Business Value (ต้นทุนลดลง รายได้เพิ่มขึ้น)"],
+  bp:["รฟม. (MRTA) ทำคะแนนสูงสุดในกลุ่ม (2.8267) เพราะมีกระบวนการและมาตรฐานที่แข็งแกร่ง มีการถ่ายทอดแนวทางปฏิบัติเดียวกันทั่วองค์กร และประเมินการรับรู้ผู้มีส่วนได้ส่วนเสียครบถ้วน","กทพ. (EXAT) ทำคะแนน 2.5067 — กทท. ต้องเร่งเครื่องด้านการสื่อสาร การตั้งกรอบประเมินผล และพิสูจน์ผลลัพธ์ฝั่ง 'คน' (People) เพื่อไล่ตาม"]},
+  {id:"2.2",grp:"2",gname:"การนำเทคโนโลยีดิจิทัลมาปรับใช้ทั่วองค์กร (Digital Transformation)",gw:25,gs68:2.166,name:"การบริหารโครงการและการดำเนินงาน DT อย่างมีประสิทธิภาพ (Project Management)",w:8,s68:2.166,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบริหารโครงการและแนวปฏิบัติที่เป็นระบบ ทำซ้ำได้ และเป็นมาตรฐาน","ขอบเขตครอบคลุมตั้งแต่การบริหารแผนงาน Requirement การแก้ปัญหา Change Management และการยอมรับการเปลี่ยนแปลง","มีการกำหนดแนวทางประเมินความสำเร็จ แผนบริหารความเสี่ยงโครงการ และ Post-implementation Review","มีการถ่ายทอดแนวปฏิบัติทั่วองค์กร วิเคราะห์ผู้มีส่วนได้ส่วนเสีย และเริ่มประเมินการรับรู้"],
+  results:["(L1-2) มี 'คู่มือการบริหารโครงการด้าน DT' ครอบคลุม TOR, ROI, การบริหารความเสี่ยง และ Change Management","(L3) มีการทำ Stakeholder Analysis, RACI Matrix, แผนสื่อสาร และรายงานสรุปผลการประเมินการรับรู้ของพนักงาน","(L4-5) มีการกำหนดตัวชี้วัดผลลัพธ์ (Outcome) มีการประเมินหลังสิ้นสุดโครงการ (Lesson Learned) และรายงานผลต่อคณะกรรมการ"],
+  gaps:["หลักฐาน Implementation ยังไม่ชัดเจน: การมีคู่มือและแผนสื่อสาร (L1-3) ยังไม่เพียงพอ หากไม่สามารถพิสูจน์ว่าผู้ปฏิบัติงานนำไปใช้บริหารโครงการได้จริงทั้งองค์กร","กับดัก Output vs Outcome: ตัววัดส่วนใหญ่เป็น Output เช่น 'โครงการเสร็จตามเวลา' ไม่ได้สะท้อน Outcome เช่น 'โครงการทำให้รายได้เพิ่มขึ้นเท่าไร'","ขาดการกำหนด Leading และ Lagging Indicator เพื่อนำไปสู่การปรับปรุงกระบวนการอย่างต่อเนื่อง"],
+  actions:["รื้อระบบ KPIs: กำหนด Leading Indicator (เช่น ความพร้อมของระบบทดสอบ) และ Lagging Indicator (เช่น ความพึงพอใจหลังการใช้งานจริง) และเปลี่ยนจาก Output ไปสู่ Outcome","ยกระดับการวัดผลการสื่อสาร: วัดว่าร้อยละ 90 ของ Project Manager เข้าใจและสามารถเขียน TOR / บริหารโครงการตามมาตรฐานใหม่ได้จริง"],
+  docs:["Project Implementation Use Cases: เลือกโครงการ IT สำคัญมาทำแฟ้มผลงาน (Portfolio) แสดงตั้งแต่ Stakeholder Analysis ไปจนถึง Post-Implementation Review ตามมาตรฐานคู่มือเป๊ะๆ","Outcome Dashboard & Report: สรุปผลลัพธ์โครงการดิจิทัลที่ระบุ Leading/Lagging Indicator และ Outcome จับต้องได้","รายงานการประเมิน 'ประสิทธิภาพ' การสื่อสาร: เจาะลึกถึงระดับความเข้าใจของผู้ปฏิบัติงาน ไม่ใช่แค่ยอดผู้เข้าร่วมรับฟัง"],
+  bp:["รฟม. (2.8267) ทำคะแนนสูงสุด เพราะความครอบคลุมของการวิเคราะห์กระบวนการและการประเมินการรับรู้ชัดเจนกว่า","Quick Win: ตั้งโฟลเดอร์ 'ตัวอย่างความสำเร็จของโครงการ (Project Use Cases)' รวมเอกสาร End-to-End ตั้งแต่ใบขออนุมัติแรกจนถึงใบปิดโครงการและผลประเมิน Outcome — นี่คือหลักฐาน Implementation ชั้นดี"]},
+  {id:"2.3",grp:"2",gname:"การนำเทคโนโลยีดิจิทัลมาปรับใช้ทั่วองค์กร (Digital Transformation)",gw:25,gs68:2.166,name:"การจัดการด้านคุณภาพ (Quality Management)",w:8,s68:2.166,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["เริ่มมีการจัดการด้านคุณภาพด้านการพัฒนา DT","มีแนวทางการเลือกเครื่องมือหรือเทคนิคการจัดการด้านคุณภาพที่ชัดเจน","มีการจัดตั้งและดำเนินการตรวจสอบด้าน DT (Digital Audit หรือ Computer Audit)"],
+  results:["(L1-2) มีคู่มือกระบวนการจัดการคุณภาพ ครอบคลุมการกำหนดมาตรฐาน เครื่องมือ/เทคนิค Quality Management Plan, QMS Good Practices และ Computer Audit","(L3) มีการวิเคราะห์ผู้มีส่วนได้ส่วนเสีย (RACI Chart) และถ่ายทอดกระบวนการแก่ผู้มีส่วนได้ส่วนเสีย","(L4-5) มีการกำหนดการวัด ติดตาม วิเคราะห์ตัววัดผลลัพธ์ (Outcome) และนำผลลัพธ์เข้าสู่กระบวนการทบทวนปรับปรุง"],
+  gaps:["เอกสารที่มีอยู่ยังไม่ตอบโจทย์ระดับ 2: TRIS มองว่า กทท. 'เพิ่งจะเริ่มมีแนวทาง' และ QMS Good Practices ยังไม่ชัดเจนพอ กระบวนการยังไม่เป็น Standardized Practice","ขาดหลักฐานการนำไปใช้จริงทั่วองค์กร: ตัวชี้วัดยังไม่ใช่ Leading/Lagging Indicator ที่สามารถประเมินประสิทธิผลเพื่อปรับปรุงงานได้อย่างแท้จริง"],
+  actions:["จัดทำคู่มือและตัวอย่าง QMS Good Practices ให้ชัดเจน: รวบรวม Use Cases หรือตัวอย่างการทำงานด้านคุณภาพที่ประสบความสำเร็จ","พัฒนาระบบ KPIs: กำหนด Leading (เช่น อัตราความผิดพลาดระหว่างทดสอบระบบ) และ Lagging (เช่น จำนวนปัญหาด้านคุณภาพหลังส่งมอบ) Indicator","ยกระดับ Implementation: นำมาตรฐานคุณภาพไปบังคับใช้กับทุกโครงการพัฒนาดิจิทัลอย่างเป็นระบบ"],
+  docs:["คู่มือ QMS Good Practices (ฉบับปรับปรุง): เนื้อหาละเอียดขึ้น พร้อมตัวอย่างกรณีศึกษาเชิงปฏิบัติ","Quality Control/Assurance Report: หลักฐานที่พิสูจน์ว่ามีการนำเครื่องมือคุณภาพไปใช้ในการพัฒนาโครงการจริง","Dashboard แสดงตัวชี้วัด Leading และ Lagging Indicators ด้านคุณภาพของระบบดิจิทัล พร้อมการวิเคราะห์เพื่อนำไปสู่การปรับปรุง"],
+  bp:["รฟม. และ กทพ. ได้รับการยอมรับว่า 'มีมาตรฐานด้านคุณภาพ มี Quality Management Plan มี QMS Good Practices ที่เป็นระบบทำซ้ำได้ (Repeatable)' — กทท. ยังต้องตามให้ทัน"]},
+  {id:"3.1",grp:"3",gname:"การบูรณาการเชื่อมโยงข้อมูลระหว่างหน่วยงาน (Government Integration)",gw:10,gs68:3.0,name:"การบูรณาการเชื่อมโยงข้อมูลและการดำเนินงานร่วมกันระหว่างหน่วยงาน",w:10,s68:3.0,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบูรณาการเชื่อมโยงข้อมูลและการดำเนินงานร่วมกันระหว่างหน่วยงานทั้งภาครัฐและเอกชนอย่างเป็นระบบ ทำซ้ำได้ เป็นมาตรฐาน","มีเกณฑ์การพิจารณาเลือกคู่ความร่วมมือ (Partner Selection) อย่างเหมาะสม","มีหลักฐาน Implementation ที่ชัดเจน: เช่น การทำ MOU แลกเปลี่ยนข้อมูลกับกรมการขนส่งทางบก (ขบ.) เพื่อติดตามรถบรรทุกและควบคุมความปลอดภัย","มีการถ่ายทอดกระบวนการ วิเคราะห์ผู้มีส่วนได้ส่วนเสีย ทำแผนสื่อสาร และประเมินผลการรับรู้ครบถ้วน"],
+  results:["(L1-2) มี 'คู่มือและนโยบายการบูรณาการเชื่อมโยงข้อมูล' กำหนดเกณฑ์เลือกคู่ความร่วมมือ และมีการต่ออายุ/จัดทำ MOU ร่วมกับหน่วยงานภายนอก","(L3) มี RACI Matrix วิเคราะห์ผู้มีส่วนได้ส่วนเสีย สื่อสารให้พนักงานภายในและหน่วยงานภายนอกรับทราบ และมีการประเมินการรับรู้ครบถ้วน","(L4-5) มีการกำหนดตัวชี้วัดผลลัพธ์ ทำแบบสำรวจความพึงพอใจคู่ความร่วมมือ (เช่น กรมการขนส่งทางบก) และนำรายงานผลประเมินเสนอต่อผู้บริหาร"],
+  gaps:["ช่องว่าง Level 4-5: TRIS มองว่า 'แบบสำรวจความพึงพอใจ' หรือ 'จำนวน MOU ที่ทำสำเร็จ' เป็นเพียง Output — TRIS ต้องการ Outcome เช่น การเชื่อมโยงข้อมูลกับ ขบ. ทำให้ลดเวลาดำเนินงานได้กี่เปอร์เซ็นต์ ลดความผิดพลาด หรือลดต้นทุนทางสังคมได้เท่าไร","ขาด Leading/Lagging Indicator และขาดการนำระบบดิจิทัล/บูรณาการข้อมูลไปยกระดับกลยุทธ์องค์กร"],
+  actions:["เปลี่ยน KPIs จาก Output เป็น Outcome: ยกเลิกการใช้ความพึงพอใจเป็นตัวชี้วัดหลัก เปลี่ยนไปวัดผลลัพธ์จากการเชื่อมโยง เช่น เพิ่มประสิทธิภาพงาน ลดเอกสาร หรือบริการเบ็ดเสร็จ ณ จุดเดียว","สร้าง Leading และ Lagging Indicator: เช่น ความพร้อมของ API (Leading) และปริมาณธุรกรรมที่ทำได้อัตโนมัติ (Lagging)","ยกระดับการบูรณาการข้อมูลสู่ระดับกลยุทธ์ (Strategic Level): ขยายการเชื่อมโยงให้ครอบคลุม Data Analytics"],
+  docs:["Integration Outcome Report: สรุปผลลัพธ์จากการเชื่อมโยงข้อมูลกับหน่วยงานต่างๆ เป็นสถิติตัวเลข เช่น ชั่วโมงการทำงานที่ลดลง ความผิดพลาดของข้อมูลที่ลดลง งบประมาณที่ประหยัดได้","Dashboard แสดง Leading และ Lagging Indicators สำหรับวัดประสิทธิภาพการเชื่อมโยงข้อมูลและ API","Cross-agency Data Analytics Report: แสดงให้เห็นว่า กทท. นำข้อมูลจากหน่วยงานอื่นมาประกอบการวางแผนหรือกำหนดกลยุทธ์ทางธุรกิจอย่างไร"],
+  bp:["กทท. เป็น Best Practice ในกลุ่มนี้! คะแนน 3.0000 นำหน้า รฟม. และ กทพ. (2.8333) เพราะสามารถพิสูจน์ Implementation ได้ชัดเจนกว่าผ่านการเจรจาต่ออายุและเซ็น MOU กับ ขบ. — รฟม. และ กทพ. ถูก TRIS วิจารณ์ว่า 'ยังไม่พบหลักฐาน Implementation ที่ชัดเจน'","Quick Win ปี 69: แก้ปัญหา GFMIS-SOE ให้ส่งข้อมูลตรงเวลา และเปลี่ยนตัวชี้วัดโครงการ One Stop e-Port Service จาก 'ความพึงพอใจ' เป็น 'มูลค่าเวลา/ต้นทุนที่ผู้ประกอบการประหยัดได้'"]},
+  {id:"4.1",grp:"4",gname:"การกำกับดูแลข้อมูลและการบริหารข้อมูลขนาดใหญ่ (Data Governance)",gw:10,gs68:3.0,name:"การดำเนินการด้านการกำกับดูแลข้อมูลและการบริหารข้อมูลขนาดใหญ่",w:10,s68:3.0,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["วางโครงสร้างการกำกับดูแลข้อมูล (Data Governance Council และ Data Steward Team) ที่ชัดเจน มีส่วนงานกลางประกอบด้วยบุคลากรด้านธุรกิจและไอที","มีคู่มือและกระบวนการทำงานที่เป็นระบบ (Repeatable) เป็นมาตรฐาน และบังคับใช้นโยบายข้อมูลทั่วองค์กร","มีการวัดประสิทธิภาพกระบวนการ ตรวจสอบคุณภาพข้อมูล และประเมิน ROI จากการบริหารข้อมูล","มี Implementation เชิงประจักษ์: คัดเลือกชุดข้อมูลสำคัญ (Critical Knowledge) จาก ERP, VCMS และ CTMS มาบริหารเป็น Big Data","มีการวิเคราะห์ผู้มีส่วนได้ส่วนเสียครบถ้วนตลอด Value Chain สื่อสารได้ดี และมีการประเมินผลการรับรู้"],
+  results:["(L1-2) โครงสร้างคู่มือกำกับดูแล (V4.0) ตั้งคณะกรรมการ นโยบาย แบบประเมินคุณภาพ (DQA Checklist, DQA Self-Assessment) และวัดความคุ้มทุน (ROI) ครบถ้วน","(L3) สื่อสาร ถ่ายทอด วิเคราะห์ผู้มีส่วนได้ส่วนเสียผ่าน Value Chain และ RACI Chart รวมถึงมีหลักฐานการปฏิบัติงานจริงในฐานข้อมูลระดับองค์กร","(L4-5) มีการติดตามประเมินผลตามตัวชี้วัด นำเข้าสู่ที่ประชุมคณะทำงาน และนำผลลัพธ์ไปทบทวนเพื่อบรรจุลงในแผนปฏิบัติการดิจิทัล ปี 2568"],
+  gaps:["ตกม้าตายเรื่อง GFMIS-SOE: การนำส่งข้อมูลเข้าระบบ GFMIS-SOE ของ สคร. 'ล่าช้า' — นี่คือจุดตายเชิงประจักษ์ที่ทำให้ กทท. ไม่สามารถหลุดพ้นระดับ 3 ขึ้นไปได้","KPIs ยังไม่เป็น Outcome: ตัวชี้วัดที่ส่งให้ TRIS ยังถูกมองว่าเป็นแค่ Output ไม่ได้แสดงว่า กทท. ตัดสินใจทางธุรกิจดีขึ้นแค่ไหนจากข้อมูลชุดนี้","ขาดการประยุกต์ใช้ AI และ Big Data เชิงวิเคราะห์/พยากรณ์"],
+  actions:["ปรับปรุงการนำส่งข้อมูล GFMIS-SOE (Quick Win): กำหนดแนวทางการทำงานใหม่ร่วมกับ สคร. ส่งข้อมูลได้ 'ถูกต้อง ครบถ้วน ทันเวลา' โดยเด็ดขาด","ขับเคลื่อน Big Data ด้วย AI: นำ AI มาทำ Data Analytics / Predictive Analytics เพื่อพยากรณ์แนวโน้ม เช่น คาดการณ์ความหนาแน่นรถบรรทุกหรือปริมาณสินค้า","ปรับ KPI ของ Data Governance ให้เป็น Outcome: เปลี่ยนจาก 'สร้างคู่มือ/โครงสร้าง' ไปเป็น 'เพิ่มรายได้ ลดเวลา หรือยกระดับความพึงพอใจลูกค้าได้กี่เปอร์เซ็นต์จากการใช้ Big Data'"],
+  docs:["GFMIS-SOE SLA Report: เอกสารยืนยันสถิติการส่งมอบข้อมูลให้ สคร. ที่ตรงเวลาและไม่มีความผิดพลาด 100% ตลอดปี","Data Analytics Use Cases: รายงานผลการประยุกต์ใช้ AI และ Big Data แสดงว่า กทท. ใช้ข้อมูลจาก ERP, VCMS, CTMS สร้างแบบจำลองเชิงพยากรณ์ปรับปรุงการทำงานของท่าเรืออย่างไร","Outcome & Value Realization Report: รายงานผลการกำกับดูแลข้อมูลที่แสดงเป็นตัวเลขเชิงเศรษฐศาสตร์หรือประสิทธิภาพที่เพิ่มขึ้น (Business/Public Value)"],
+  bp:["กทท. และ กทพ. เป็น Best Practice ในกลุ่ม (3.0000) เหนือกว่า รฟม. (2.8333) เพราะโชว์การตั้งคณะทำงาน จัดการโครงสร้าง และกำหนดฐานข้อมูลได้ชัดเจน","กุญแจปลดล็อคปี 69: แก้ไขปัญหา GFMIS-SOE และนำ Big Data ที่ กทท. จัดระเบียบไว้อย่างดีไปเข้ากระบวนการ 'วิเคราะห์ด้วย AI (Predictive Analytics)' เพื่อให้เกิด Outcome เชิงตัวเลขธุรกิจ"]},
+  {id:"5.1",grp:"5",gname:"การบริหารความมั่นคงปลอดภัยสารสนเทศ (Information Security)",gw:10,gs68:3.4,name:"การบริหารจัดการความมั่นคงปลอดภัยสารสนเทศ (ISMS)",w:4,s68:3.4,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบริหาร ISMS อย่างเป็นระบบ ทำซ้ำได้ (Repeatable) เป็นมาตรฐาน (Standardized) สอดคล้องกับ ISO 27001","มีการกำหนดนโยบายหรือแผนการบริหารจัดการครอบคลุมประเด็นสำคัญ","มีการถ่ายทอดแนวทางปฏิบัติทั่วองค์กร วิเคราะห์ผู้มีส่วนได้ส่วนเสีย และประเมินการรับรู้อย่างครบถ้วน","มีหลักฐาน Implementation เชิงประจักษ์ — เป็นจุดแข็งที่ทำให้คะแนนทะลุระดับ 3 ขึ้นมาได้","เริ่มมีการกำหนดการวัด ติดตาม วิเคราะห์ ตัววัดผลลัพธ์ (Outcome) แล้ว"],
+  results:["(L1-3) มีหลักฐานครบถ้วนทั้งกระบวนการ นโยบาย การสื่อสาร และการนำไปปฏิบัติจริง","(L4-5) มีการประเมินตัววัดผลลัพธ์ (Outcome) และนำผลลัพธ์เข้าสู่กระบวนการทบทวนปรับปรุง นำไปเรียนรู้และจัดการความรู้"],
+  gaps:["จุดสะดุดที่ Level 4-5: หลักฐานที่ส่งไปเป็นเพียง Output เช่น 'ทำตามแผนครบหรือไม่' ยังไม่ใช่ Outcome ที่สะท้อนว่าระบบความปลอดภัยดีขึ้นหรือป้องกันภัยได้ดีขึ้นอย่างไร","ขาด Leading/Lagging Indicator ที่ชัดเจน ทำให้ได้คะแนนระดับ 4 เพียงบางส่วน ไม่เต็ม 5.0"],
+  actions:["ปรับ KPIs ให้เป็น Outcome: กำหนดตัวชี้วัดใหม่ เช่น 'อัตราความเสียหายจากภัยคุกคามไซเบอร์ที่ลดลง' หรือ 'ร้อยละความพร้อมใช้งานของระบบ (Service Availability)' ที่เพิ่มขึ้น","กำหนด Leading Indicator: เช่น จำนวนช่องโหว่ที่ตรวจพบและแก้ไขทันเวลา และ Lagging Indicator: เช่น จำนวนครั้งที่ระบบถูกโจมตีสำเร็จ"],
+  docs:["Dashboard หรือรายงานสรุปผลการวัดด้วย Leading/Lagging Indicators: แสดงสถิติความปลอดภัยทางไซเบอร์อย่างเป็นรูปธรรม","Outcome Report ด้านความมั่นคงปลอดภัย: รายงานแสดงมูลค่าความเสียหายที่ป้องกันได้ หรือประสิทธิภาพที่เพิ่มขึ้นจากความเสถียรของระบบ","รายงานการนำผลลัพธ์ไปปรับปรุงกระบวนการ (Continuous Improvement): แสดงว่าเมื่อได้ตัวเลข Outcome มาแล้ว ผู้บริหารสั่งการให้ปรับปรุงนโยบายอย่างไร"],
+  bp:["กทท. เป็น Best Practice ในกลุ่ม! คะแนน 3.4000 นำหน้า กทพ. (3.0833) และ รฟม. (3.0000) เพราะพิสูจน์ Implementation ได้ชัดเจนกว่า","กลยุทธ์ปี 69: เพียงแค่ปรับ Dashboard ตัวชี้วัดให้แสดง 3 ช่อง: 1) Leading Indicator 2) Lagging Indicator 3) Business Outcome และนำเสนอให้คณะกรรมการชุดใหญ่อนุมัติ"]},
+  {id:"5.2",grp:"5",gname:"การบริหารความมั่นคงปลอดภัยสารสนเทศ (Information Security)",gw:10,gs68:3.4,name:"การบริหารจัดการความเสี่ยงด้านความมั่นคงปลอดภัยสารสนเทศ (ISMS Risk Management)",w:3,s68:3.4,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบริหารความเสี่ยงด้าน ISMS อย่างเป็นระบบ ทำซ้ำได้ เป็นมาตรฐาน สอดคล้องกับ ISO 27001","มีการกำหนดแผนบริหารความเสี่ยง ติดตาม ทบทวน และรายงานความเสี่ยงอย่างครบถ้วน","มีการถ่ายทอดแนวปฏิบัติทั่วองค์กร วิเคราะห์และประเมินการรับรู้ผู้มีส่วนได้ส่วนเสีย","มี Implementation เชิงประจักษ์ที่ชัดเจน — เป็นจุดแข็งที่ทำให้สอบผ่าน Level 3 ได้อย่างเต็มภาคภูมิ"],
+  results:["(L1-3) มีแนวทาง กระบวนการ และการถ่ายทอดกระบวนการบริหารความเสี่ยงด้าน ISMS แก่ผู้มีส่วนได้ส่วนเสียอย่างครบถ้วน พร้อมหลักฐานการปฏิบัติจริง","(L4-5) มีการกำหนดการวัด ติดตาม ประเมินตัววัดผลลัพธ์ (Outcome) และนำผลลัพธ์เข้าสู่กระบวนการทบทวนการกำกับดูแลดิจิทัลและแผนปฏิบัติการระยะยาว"],
+  gaps:["ติดกับดัก Output: TRIS ตีความว่าสิ่งที่ กทท. ส่งไปเป็น Output เช่น 'จำนวนความเสี่ยงที่ระบุได้' หรือ 'จำนวนครั้งที่ทบทวนแผน' — TRIS ต้องการ Outcome เชิงประจักษ์ เช่น 'มูลค่าความเสียหายที่ลดลงจากการปิดช่องโหว่'","ขาด Leading/Lagging Indicator และการนำผลลัพธ์มาทบทวนเพื่อพัฒนาอย่างต่อเนื่อง"],
+  actions:["รื้อระบบ KPI ความเสี่ยงไซเบอร์: กำหนด Leading Indicator เช่น จำนวนช่องโหว่ที่ยังไม่ได้รับการแก้ไข หรือร้อยละพนักงานที่สอบผ่าน Phishing Test","เปลี่ยน Output เป็น Outcome: เปลี่ยนจาก 'ทำแผนบริหารความเสี่ยงเสร็จ' เป็น 'แผนสามารถลด Downtime ของระบบหลักลงได้กี่ชั่วโมง'","นำผลตัวเลขไปใช้ทบทวนแผน: รายงานในที่ประชุมเพื่อให้ผู้บริหารสั่งการปรับปรุงกระบวนการหรือแผนปฏิบัติการดิจิทัล"],
+  docs:["Dashboard ISMS Risk Indicators: แสดงข้อมูลแยกประเภทเป็น Leading Indicator และ Lagging Indicator อย่างชัดเจน","Outcome Report: รายงานประเมินประสิทธิภาพการลดความเสี่ยง วัดเป็นมูลค่าความเสียหายที่ป้องกันได้ หรืออัตราการลดลงของภัยคุกคาม","Management Review Minutes: รายงานการประชุมที่แสดงวาระการนำผล Outcome ด้านความเสี่ยงมาพิจารณาปรับปรุงกระบวนการหรือทบทวนแผนดิจิทัล"],
+  bp:["กทท. เป็น Best Practice ในกลุ่ม! คะแนน 3.4000 แซงหน้า กทพ. (3.0833) และ รฟม. (3.0000) ชัดเจน เพราะแสดง Implementation ได้ดีกว่า","Quick Win ปี 69: ตรวจสอบว่า 'ทะเบียนความเสี่ยงด้าน IT ได้ถูกจัดส่งและหลอมรวมกับความเสี่ยงองค์กร (RM&IC) แล้วหรือยัง?' และปรับรายงานให้โชว์ Leading/Lagging Indicators"]},
+  {id:"5.3",grp:"5",gname:"การบริหารความมั่นคงปลอดภัยสารสนเทศ (Information Security)",gw:10,gs68:3.4,name:"การตรวจสอบการบริหารจัดการความมั่นคงปลอดภัยสารสนเทศ (ISMS Audit)",w:3,s68:3.4,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการตรวจสอบ ISMS Audit อย่างเป็นระบบ ทำซ้ำได้ เป็นมาตรฐาน","มีการถ่ายทอดแนวทางปฏิบัติทั่วองค์กร","วิเคราะห์และประเมินการรับรู้ผู้มีส่วนได้ส่วนเสียอย่างครบถ้วน","มีหลักฐาน Implementation ที่ชัดเจน — ทำให้ผู้ประเมินให้คะแนนทะลุระดับ 3"],
+  results:["มีการกำหนดการวัด ติดตาม วิเคราะห์ตัววัดผลลัพธ์ (Outcome) ของกระบวนการ ISMS Audit และมีการนำผลลัพธ์เข้าสู่กระบวนการทบทวนการกำกับดูแล/แผนปฏิบัติการดิจิทัล รวมถึงนำผลไปเรียนรู้ จัดการความรู้ และจัดเก็บเป็นนวัตกรรม"],
+  gaps:["ตัววัดประสิทธิผลยังเป็นแค่ Output เช่น 'ดำเนินงานตรวจสอบได้ 100% ตามแผน' หรือ 'มีรายงานตรวจสอบกี่ฉบับ' — TRIS ต้องการ Outcome เช่น 'จำนวนช่องโหว่ระดับสูงที่พบจาก Audit ลดลงร้อยละ XX'","ขาดกลไก Continuous Improvement เชิงประจักษ์: เมื่อตรวจสอบพบช่องโหว่ (Audit Findings) องค์กรต้องนำข้อมูลไปปรับปรุงนโยบายหรือยกระดับระบบ"],
+  actions:["ปฏิวัติตัวชี้วัด ISMS Audit ให้เป็น Outcome: เช่น 'จำนวนช่องโหว่ระดับสูง (Critical Findings) จาก Audit ลดลงร้อยละ XX เทียบปีก่อน' หรือ 'ความสูญเสียทางการเงินที่ป้องกันได้จากข้อเสนอแนะของทีม Audit'","กำหนด Leading และ Lagging Indicators ชัดเจน: เช่น ร้อยละระบบสำคัญที่ผ่าน Audit ความพร้อม (Leading) และจำนวนเหตุการณ์ละเมิดความปลอดภัยที่รอดพ้นสายตา Audit (Lagging)","สร้างวงจรการทบทวนผล (Review Cycle): นำผลข้อค้นพบจาก ISMS Audit ไปเป็นวาระรายงานต่อผู้บริหาร/คณะกรรมการ"],
+  docs:["Dashboard ISMS Audit (Outcome & Leading/Lagging): สรุปตัวเลขสถิติชัดเจนว่างาน Audit ส่งผลดีต่อองค์กรอย่างไรในเชิงคุณค่า","Continuous Improvement Report: หลักฐาน (รายงานประชุม/บันทึก) ที่แสดงว่าผู้บริหารสั่งการให้นำข้อบกพร่องจาก Audit ไปแก้ไขหรือปรับปรุงระบบ"],
+  bp:["กทท. เป็น Best Practice ในกลุ่ม! คะแนน 3.4000 ฉีกหนีคู่เทียบ กทพ. (3.0833) และ รฟม. (3.0000) เพราะแสดง Implementation ของกระบวนการ ISMS Audit ได้ชัดเจน","กลยุทธ์ปี 69: เปลี่ยน Dashboard ตัวชี้วัดจาก 'ทำเสร็จกี่เปอร์เซ็นต์' ไปเป็น Leading/Lagging Indicators และ Outcome — แล้วโชว์ว่าผู้บริหารนำผล Audit ไปสั่งการปรับปรุงองค์กรอย่างต่อเนื่อง"]},
+  {id:"6.1",grp:"6",gname:"การบริหารความต่อเนื่องทางธุรกิจและความพร้อมใช้ระบบ (BCM)",gw:10,gs68:3.0,name:"การบริหารจัดการทรัพย์สินด้านเทคโนโลยีสารสนเทศ (IT Asset Management)",w:2.5,s68:3.0,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["มีแนวทางจัดการทรัพย์สินครอบคลุมตั้งแต่การจัดทำ/ปรับปรุงทะเบียน การบำรุงรักษา ไปจนถึงการยกเลิกและเรียกคืน","มีการจัดทำทะเบียน IT Inventory List ทั้งฮาร์ดแวร์และซอฟต์แวร์ที่รองรับระบบองค์กรได้ครบถ้วน","นำระบบ ITSM มาใช้ในการบริหารจัดการและจัดเก็บข้อมูลทรัพย์สินอย่างเป็นระบบ","มีการถ่ายทอดแนวปฏิบัติทั่วองค์กร วิเคราะห์ผู้มีส่วนได้ส่วนเสีย และประเมินการรับรู้ครบถ้วน","มี Implementation เชิงประจักษ์ผ่านการใช้งานระบบ ITSM จริง"],
+  results:["(L1-3) มีคู่มือการบันทึกบัญชีสินทรัพย์ นำ ITSM ควบคุมวงจรชีวิต IT Asset (Requisition, Configuration, Maintenance, Disposal) และมีหลักฐานการปฏิบัติงานจริงครบถ้วน","(L4) กำหนดตัวชี้วัดผลลัพธ์ 3 ตัว: 1) Service Availability 2) ความถูกต้อง/ทันกาลของข้อมูล IT Asset 3) ความสำเร็จในการจัดซื้อทดแทน EOL","(L5) นำข้อมูลจากกระบวนการวิเคราะห์เพื่อจัดทำแผนปฏิบัติการดิจิทัล ประจำปี 2568"],
+  gaps:["สอบตก Level 4: TRIS มองว่า KPI 3 ตัวที่ กทท. ส่งไปเป็น Output ทั้งสิ้น — 'Service Availability' และ 'ความสำเร็จในการจัดซื้อทดแทน' คือสิ่งที่ทำตามหน้าที่ ไม่ใช่ Outcome เชิงคุณค่า","ขาด Leading/Lagging Indicator: ทำให้การนำผลลัพธ์ไปทบทวนและปรับปรุงกระบวนการต่อเนื่องยังไม่สมบูรณ์"],
+  actions:["ปรับ KPI จาก Output เป็น Leading/Lagging Indicator: Leading เช่น ร้อยละเครื่อง/ซอฟต์แวร์ที่ใกล้หมดอายุ (EOL) แต่มีแผนบำรุงรักษา; Lagging เช่น จำนวนครั้งระบบหยุดชะงักจากฮาร์ดแวร์เสื่อมสภาพ","สร้างวงจรทบทวนผล: นำ Leading/Lagging ไปรายงานผู้บริหารเพื่อกำหนดงบลงทุนด้าน IT (IT Investment) ให้แม่นยำยิ่งขึ้น"],
+  docs:["Dashboard/รายงานสรุปตัวชี้วัด IT Asset (Leading/Lagging Indicators): แสดงสถิติเชิงลึก ไม่ใช่แค่นับจำนวนเครื่อง","Asset Optimization Outcome: เอกสารพิสูจน์ว่าการบริหาร IT Asset ช่วยยืดอายุการใช้งาน หรือประหยัดงบประมาณการจัดซื้อซ้ำซ้อนได้อย่างไร","รายงานการประชุมที่ระบุการนำผลประเมิน Asset ไปปรับปรุงแผน: หลักฐานว่าผู้บริหารนำข้อมูลอายุ Asset ไปพิจารณาจัดสรรงบประมาณปีถัดไป"],
+  bp:["กทพ. (EXAT) เป็น Best Practice ที่ 3.2500 รองลงมาคือ รฟม. (3.0625) — ทั้ง 3 องค์กรติดปัญหาเดียวกัน คือ 'ตัววัดเป็น Output ไม่ใช่ Outcome'","Quick Win ปี 69: ใน Dashboard ห้ามใช้คำว่า 'Service Availability' หรือ 'ความสำเร็จในการจัดซื้อ' ให้เปลี่ยนเป็น 'ต้นทุนซ่อมฉุกเฉินที่ลดลง (Outcome)' พร้อม Leading/Lagging ตาม TRIS แนะ"]},
+  {id:"6.2",grp:"6",gname:"การบริหารความต่อเนื่องทางธุรกิจและความพร้อมใช้ระบบ (BCM)",gw:10,gs68:3.0,name:"การบริหารจัดการคอนฟิกูเรชั่น (Configuration Management)",w:2.5,s68:3.0,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["จัดเก็บการเปลี่ยนแปลงการตั้งค่าระบบของทุกอุปกรณ์ ระบบ และระบบงาน (System Configuration Version Control) อย่างเป็นระบบ ทำซ้ำได้ เป็นมาตรฐาน","กำหนดขอบเขต Configuration Item (CI) ชัดเจน จัดทำ/ทบทวน Minimum Baseline Standard ได้ดี","มีการถ่ายทอดแนวปฏิบัติทั่วองค์กร วิเคราะห์ผู้มีส่วนได้ส่วนเสีย และประเมินการรับรู้ครบถ้วน","มี Implementation เชิงประจักษ์ผ่าน ITSM และ PRTG Monitor — เป็นจุดแข็งที่ทำให้คะแนนแตะระดับ 3"],
+  results:["(L1-2) นำ ITSM จัดการ Configuration มี Minimum Baseline Standard กำหนดพารามิเตอร์ และสอบทานการตั้งค่าผ่านระบบ PRTG","(L3) ทำ Stakeholder Analysis, RACI Matrix, แผนสื่อสาร และประเมินการรับรู้ของพนักงาน ฝทส.","(L4) ระบุว่ามีตัวชี้วัดผลลัพธ์ผ่านรายงานต่างๆ เช่น รายงานการเปลี่ยนแปลงระบบ, Availability, สรุปปัญหาระบบ และสรุปผล Config ประจำปี","(L5) นำข้อมูล Configuration ไปจัดทำแผนปฏิบัติการดิจิทัล ประจำปี 2568"],
+  gaps:["ตกม้าตายเรื่อง KPI: TRIS ระบุว่า 'ตัววัดส่วนใหญ่เป็น Output' — 'รายงานการเปลี่ยนแปลงระบบ' หรือ 'รายงานสรุปผล Config' คือการนับจำนวน (Output) ไม่ใช่ตัวชี้วัดประสิทธิภาพ (Outcome)","ขาดการตั้ง Leading/Lagging Indicator ที่นำไปสู่การทบทวนกระบวนการ"],
+  actions:["ปฏิวัติ KPI Configuration Management: เลิกใช้จำนวนการเปลี่ยน Config เป็นตัวชี้วัด เปลี่ยนเป็น Outcome เช่น 'ร้อยละการลดลงของระบบล่ม (Downtime) ที่มีสาเหตุจาก Config ผิดพลาด'","กำหนด Leading/Lagging Indicators: Leading เช่น ร้อยละ Server/อุปกรณ์ที่ตั้งค่าสอดคล้องกับ Minimum Baseline 100%; Lagging เช่น จำนวน Incident จากช่องโหว่ Config","ปิดลูป Continuous Improvement: เมื่อพบข้อผิดพลาดจากการตั้งค่า ต้องมีหลักฐานการประชุมเพื่อนำปัญหาไปปรับแก้คู่มือ Minimum Baseline เวอร์ชันถัดไป"],
+  docs:["Dashboard/รายงานสรุป KPI ของ Configuration Management: แบ่ง Leading/Lagging Indicator และ Outcome ชัดเจน","Root Cause & Outcome Analysis: เอกสารสรุปกรณีศึกษาแสดงว่า Minimum Baseline ที่เข้มงวดขึ้นช่วยลดช่องโหว่หรือเพิ่มความเสถียรของระบบ","Standard Revision Minutes: บันทึกการประชุมที่แสดงว่านำผลตรวจสอบ Config ไปแก้ไขคู่มือหรือแผนงานดิจิทัล"],
+  bp:["กทพ. (3.2500) เป็น Best Practice รองลงมาคือ รฟม. (3.0625) — ทั้ง 3 ติดปัญหาเดียวกัน: 'ไม่มีใครทำตัวชี้วัด Outcome ได้สมบูรณ์แบบ'","Quick Win ปี 69: เลิกใช้คำว่า 'ความสำเร็จในการบันทึกข้อมูล (Output)' ให้ใช้ 'ลดระยะเวลาซ่อมแซมระบบจากการมีฐานข้อมูล CI ที่แม่นยำ (Outcome)' พร้อม Leading/Lagging ตาม TRIS แนะ"]},
+  {id:"6.3",grp:"6",gname:"การบริหารความต่อเนื่องทางธุรกิจและความพร้อมใช้ระบบ (BCM)",gw:10,gs68:3.0,name:"การบริหารจัดการเหตุการณ์ผิดปกติ การร้องขอการบริการ และปัญหาด้าน IT (Incident Management)",w:2.5,s68:3.0,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบริหารจัดการ Incident, Service Requests และ Problem ด้านไอทีอย่างเป็นระบบ ทำซ้ำได้ เป็นมาตรฐาน","นำระบบ ITSM (Service Desk) มาใช้บันทึก วิเคราะห์ และติดตามการแก้ไขปัญหา","กำหนดระดับความรุนแรง (Severity) และ Escalation Matrix เชื่อมโยงกับ RTO และ MTPD","มี Knowledge Error Database (KEDB) ในระบบ ITSM เพื่อสืบค้นวิธีแก้ปัญหาที่เคยเกิดขึ้น","มีหลักฐาน Implementation เชิงประจักษ์ที่ชัดเจน"],
+  results:["(L1-3) ใช้งาน ITSM เต็มรูปแบบ มี Escalation Matrix จัดลำดับความรุนแรงตาม BCP/DRP จัดทำ Knowledge Base และสำรวจความพึงพอใจ","(L4) มีตัววัดผลลัพธ์ (Outcome) ผ่านรายงาน เช่น รายงานการแก้ไขปัญหาประจำเดือน รายงาน Availability ของระบบสำคัญ","(L5) นำข้อมูลมาวิเคราะห์จัดทำแผนปฏิบัติการดิจิทัล ประจำปี 2568"],
+  gaps:["ติดกับดัก Output: แม้จะใช้ 'รายงานสรุปปัญหาประจำเดือน' หรือ 'ผลสำรวจความพึงพอใจ' TRIS มองว่านี่คือ Output (นับจำนวน Ticket) ไม่ใช่ Outcome","ขาด Leading/Lagging Indicator ของกระบวนการ IT Service Management","การวิเคราะห์ Root Cause เพื่อป้องกันปัญหาซ้ำยังไม่ถูกผูกกับตัวชี้วัดความสำเร็จขององค์กร"],
+  actions:["เปลี่ยนผ่านสู่ Outcome, Leading และ Lagging: Leading เช่น ร้อยละความสำเร็จในการแก้ปัญหาผ่าน Self-service/Knowledge Base; Lagging เช่น MTTR และจำนวน Repeated Incidents; Outcome เช่น มูลค่าความเสียหายทางธุรกิจที่ลดลง","เน้น Problem Management ไม่ใช่แค่ Incident Management: นำ Repeated Incidents มาทำ Root Cause Analysis และสร้าง Action Plan อุดช่องโหว่อย่างถาวร"],
+  docs:["ITSM Metrics Dashboard: ไม่ได้รายงานแค่จำนวน Ticket แต่โชว์ Leading/Lagging เช่น MTTR และ First Call Resolution (FCR)","Root Cause Analysis / Problem Management Report: สรุปเคสระบบล่มสำคัญ แสดงว่า IA ค้นหาสาเหตุแท้จริงและสร้าง Knowledge Base ป้องกันไม่ให้เกิดซ้ำ","Continuous Improvement Minutes: บันทึกการประชุมที่นำสถิติ Incident มาวิเคราะห์เพื่อจัดสรรงบประมาณหรือเปลี่ยนนโยบายในแผนดิจิทัลถัดไป"],
+  bp:["กทพ. (3.2500) เป็น Best Practice รองลงมาคือ รฟม. (3.0625) — ทั้ง 3 ติดปัญหาเดียวกัน: 'ตัววัดเป็น Output'","Quick Win ปี 69: ใน Dashboard ระบุเลยว่าห้ามใช้ 'ระบบพร้อมใช้งานร้อยละ 99 (Output)' ให้เปลี่ยนเป็น 'ต้นทุนค่าเสียโอกาสที่ลดลงจากการลด Downtime (Outcome)' พร้อม MTTR และ FCR"]},
+  {id:"6.4",grp:"6",gname:"การบริหารความต่อเนื่องทางธุรกิจและความพร้อมใช้ระบบ (BCM)",gw:10,gs68:3.0,name:"การบริหารจัดการความต่อเนื่องทางธุรกิจ (Business Continuity Management)",w:2.5,s68:3.0,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบริหาร BCM อย่างเป็นระบบ ทำซ้ำได้ เป็นมาตรฐาน","จัดทำแผน IT BCP และ DRP สอดคล้องกับนโยบายความเสี่ยงองค์กร อนุมัติโดยคณะกรรมการที่เกี่ยวข้อง","มีการวิเคราะห์ผลกระทบทางธุรกิจ (BIA) และจัดลำดับความสำคัญของระบบงาน","กำหนด RTO, RPO และ MTPD ชัดเจน (เช่น MTPD = 48 ชั่วโมง)","มีหลักฐาน Implementation ผ่านการทดสอบและซักซ้อมแผน BCP ประจำปี (เช่น ซ้อมเมื่อ 25 ก.ย. 68)"],
+  results:["(L1-3) มีนโยบาย แผน IT BCP/DRP, BIA, MTPD/RTO/RPO มีการอบรมพนักงาน และมีการทดสอบซักซ้อมแผนจริง","(L4) กำหนดตัวชี้วัดผลลัพธ์ เช่น ความสำเร็จในการกู้คืน 3 ระบบสำคัญ (CTMS, ERP, HRIS) ภายใน 48 ชั่วโมง และ Service Availability ปี 2568 ที่ 99.99%","(L5) นำข้อมูลจากการทดสอบแผนวิเคราะห์เพื่อจัดทำแผนปฏิบัติการดิจิทัล ประจำปี 2568 และนำเสนอต่อคณะทำงานและคณะกรรมการ"],
+  gaps:["ตกม้าตาย Level 4: TRIS ฟันธงว่า 'Service Availability 99.99%' และ 'ทดสอบแผนสำเร็จ 100%' คือ Output ไม่ใช่ Outcome — TRIS ต้องการ 'มูลค่าความเสียหายทางธุรกิจที่ป้องกันได้ (Business Value Protected)' และยังขาด Leading/Lagging Indicator","TRIS ต้องการเห็นว่าถ้าระบบกู้คืนช้ากว่า RTO ในการซ้อม ผู้บริหารสั่งการปรับสถาปัตยกรรม (EA) หรือเปลี่ยนเทคโนโลยีทันทีหรือไม่"],
+  actions:["ยกระดับ KPI เป็น Leading/Lagging: Leading เช่น ร้อยละระบบงานใหม่ที่มีแผน BCP/DRP รองรับก่อนเปิดใช้งาน; Lagging เช่น จำนวนชั่วโมงระบบหยุดชะงักจริง (นอกเหนือจากการทดสอบ)","เปลี่ยนตัวชี้วัดให้สะท้อน Outcome: แทนที่จะวัด 'กู้ระบบได้ตามเวลา' เปลี่ยนเป็น 'มูลค่าความเสียหายทางธุรกิจ (Business Value) ที่ กทท. สามารถป้องกันได้จากการกู้คืนที่รวดเร็ว'"],
+  docs:["Dashboard ตัวชี้วัด BCM ที่มี Leading และ Lagging Indicators: รายงานสถิติแยกตัวชี้วัดนำและตามอย่างชัดเจน","Value Realization of BCM: สรุปว่าการลงทุนทำระบบสำรอง (DR Site) หรือทดสอบ BCP ช่วย กทท. ลดความเสี่ยงและรักษาชื่อเสียงอย่างไร (Outcome)","Post-Test Review Minutes: บันทึกการประชุมหลังซักซ้อม BCP แสดงว่าพบจุดอ่อนอะไร ผู้บริหารสั่งการให้อัปเดตแผนอย่างไร (Continuous Improvement)"],
+  bp:["กทพ. (3.2500) เป็น Best Practice ในหมวด 6 ภาพรวม — แต่ในข้อ 6.4 ทั้ง 3 องค์กรติดปัญหาเดียวกัน 100%: ตัววัดเป็น Output และขาด Leading/Lagging","Quick Win ปี 69: เปลี่ยนหน้าตารายงาน Dashboard จาก Output (ร้อยละความสำเร็จ) เป็น Leading/Lagging Indicator และตีมูลค่า Outcome ตาม TRIS แนะ"]},
+  {id:"7.1",grp:"7",gname:"การบริหารจัดการการใช้ทรัพยากรอย่างเหมาะสม (Resource Optimization)",gw:10,gs68:2.875,name:"การดำเนินการด้านการบริหารจัดการการใช้ทรัพยากร DT อย่างเหมาะสม",w:5,s68:2.875,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["กำหนดกระบวนการบริหารจัดการทรัพย์สินด้าน IT อย่างเป็นระบบ","มีมาตรฐานและระเบียบวิธีปฏิบัติในการจัดสรรทรัพยากร DT และ Capacity Management บางส่วน","มุ่งเน้นการใช้ทรัพยากรและการลงทุนด้าน IT ให้เกิดมูลค่าสูงสุด (Value Optimization)","มี Implementation เชิงประจักษ์ที่เหนือกว่าองค์กรคู่เทียบ"],
+  results:["(L1-2) จัดทำคู่มือและกระบวนการบริหารทรัพยากร ครอบคลุมการจัดสรร บริหาร Capacity และกำหนดตัวชี้วัดเพื่อลงทุนให้เกิดมูลค่าสูงสุด","(L3) มีการวิเคราะห์ผู้มีส่วนได้ส่วนเสียผ่าน RACI Chart","(L4-5) ติดตามผลตามเป้าหมายยุทธศาสตร์ที่ 2 เช่น ลดเอกสารกระดาษ (e-Saraban ลดกระดาษ >50%) จัดสรรเครื่องคอมพิวเตอร์ และนำเข้าที่ประชุมเพื่อทบทวนนโยบาย"],
+  gaps:["ตกม้าตาย Level 4: TRIS ระบุว่ายังขาดการกำหนดตัวชี้วัดผลลัพธ์รายโครงการ 'ให้ครบถ้วนในทุกมิติ (เงิน คน ระบบ เวลา ทรัพยากรพื้นฐาน)' — กทท. เน้นแค่การจัดสรรคอมพิวเตอร์และกระดาษ ขาดการโชว์ว่าโครงการ IT ใหญ่ๆ ประเมินความคุ้มค่าของการใช้ 'คน' 'เวลา' และ 'ระบบ' ครบทุกด้านหรือไม่","ขาดการประเมินความเสี่ยงด้านการจัดสรรทรัพยากรและมาตรการรองรับ"],
+  actions:["กำหนดกรอบ KPI โครงการ 5 มิติ (5-Dimension Resource Matrix): ทุกโครงการ IT ก่อนและหลังปิด ต้องมีตารางสรุปตัวชี้วัดการใช้ทรัพยากรครบ 5 ด้าน: งบประมาณ (เงิน), บุคลากร (คน), แพลตฟอร์ม (ระบบ), ระยะเวลา (เวลา), สถานที่/เครื่องมือ (พื้นฐาน)","เน้น Outcome: แปลงตัวชี้วัดเป็นผลลัพธ์ เช่น 'โครงการ e-Saraban ประหยัดงบประมาณกระดาษและเวลาคิดเป็นมูลค่ารวมกี่ล้านบาท'"],
+  docs:["Resource Optimization Dashboard: รวบรวมโครงการ IT ทั้งหมด กางตัวเลขผลการใช้ทรัพยากรครบ 5 มิติ เทียบกับแผน (Planned vs Actual)","Resource Risk Assessment Report: ประเมินความเสี่ยงด้านการจัดสรรทรัพยากรสำหรับโครงการสำคัญ พร้อมแผนสำรองกรณีงบหรือคนไม่เพียงพอ","รายงานผลสัมฤทธิ์มาตรการลดสาธารณูปโภค: สถิติตัวเลขงบประมาณที่ประหยัดได้จากการลดใช้กระดาษ (e-Saraban) เทียบกับจำนวนพนักงาน"],
+  bp:["กทท. เป็น Best Practice ในกลุ่ม! คะแนน 2.8750 นำหน้า รฟม. (2.7500) และ กทพ. (2.3333) เพราะมีหลักฐาน Implementation ที่ชัดเจนกว่า","กลยุทธ์ปี 69: สร้าง 'แฟ้มหลักฐานเชิงประจักษ์ (Use Case)' อย่างน้อย 1 เรื่อง เช่น โครงการรวบศูนย์ Server ย่อยมาไว้ Data Center กลาง — แนบข้อมูลตั้งแต่วิเคราะห์ความซ้ำซ้อน ลงมือควบรวม ไปจนถึงตัวเลขเงิน/ค่าไฟที่ประหยัดได้ (Outcome)"]},
+  {id:"7.2",grp:"7",gname:"การบริหารจัดการการใช้ทรัพยากรอย่างเหมาะสม (Resource Optimization)",gw:10,gs68:2.875,name:"การบริหารจัดการการเลือกใช้เทคโนโลยีที่เป็นมิตรต่อสิ่งแวดล้อม (Green IT Management)",w:5,s68:2.875,status:"ยังไม่เริ่ม",statusNote:"",
+  good:["นโยบาย Green IT ครอบคลุมครบ 4 องค์ประกอบบังคับ: 1) วัฏจักรของอุปกรณ์ (Equipment Lifecycle) 2) End User Computing 3) Enterprise Computing 4) ICT as a Low-Carbon Enabler","มี Implementation เชิงประจักษ์ที่จับต้องได้: ระบบฐานข้อมูลสิ่งแวดล้อม ปรับปรุงระบบทำความเย็น Data Center โครงการ Solar Cell การเช่ารถ EV และระบบ e-Saraban","มีการถ่ายทอดแนวปฏิบัติทั่วองค์กร วิเคราะห์ผู้มีส่วนได้ส่วนเสีย และประเมินการรับรู้ครบถ้วน"],
+  results:["(L1-3) มีนโยบาย Green Port และนโยบายสิ่งแวดล้อม จัดทำคู่มือ Green Procurement ประเมินการรับรู้พนักงาน ฝทส. และทั้งองค์กร พร้อมมีฐานข้อมูลการปล่อยก๊าซเรือนกระจก","(L4) วัด Outcome เป็น 'ร้อยละของเป้าหมายที่บรรลุ' และ Output เป็น 'จำนวนเทคโนโลยีที่นำมาใช้' — ยกตัวอย่างโครงการ e-Saraban, Data Center Cooling, Solar Cell และรถยนต์ EV","(L5) นำผลลัพธ์ทบทวนเพื่อจัดทำแผนแม่บทการจัดการสิ่งแวดล้อม 2567-2573 กำหนด Roadmap เป้าหมายระยะสั้น-กลาง-ยาว"],
+  gaps:["การตั้ง KPI ผิดประเภท: แม้จะโชว์ตัวเลข 'ความสำเร็จของโครงการ' แต่ TRIS มองว่านั่นคือ Output TRIS ต้องการ Outcome เชิงสิ่งแวดล้อมจริงๆ เช่น 'ปริมาณคาร์บอนที่ลดลงสุทธิ' หรือ 'จำนวนค่าไฟที่ประหยัดได้'","ขาด Leading/Lagging Indicator ที่ชัดเจนตามเกณฑ์"],
+  actions:["ยกเครื่อง KPIs เป็น Leading/Lagging: Leading เช่น ร้อยละการจัดซื้ออุปกรณ์ IT ที่เป็นไปตาม Green Procurement 100%; Lagging เช่น ค่า PUE ของ Data Center ที่ลดลง หรือปริมาณ E-Waste ที่รีไซเคิล","เปลี่ยน Output เป็น Outcome: เปลี่ยนจาก 'ร้อยละความสำเร็จของโครงการ' ไปเป็น 'ปริมาณการลดก๊าซเรือนกระจกที่คำนวณได้จริง (Carbon Emission Reduction)' หรือ 'ต้นทุนพลังงานที่ประหยัดได้'"],
+  docs:["Green IT Dashboard (Outcome & Leading/Lagging): แสดงตัวเลขการลดพลังงานและคาร์บอนชัดเจน ไม่ใช่นับแค่จำนวนโครงการ","Environmental Value Realization: สรุปว่าโครงการ Data Center Cooling หรือ Solar Cell แปลงกลับมาเป็นมูลค่าการประหยัดไฟให้ กทท. ได้เท่าไร","Management Review Minutes: รายงานการนำตัวเลข Outcome ไปพิจารณาปรับปรุงยุทธศาสตร์ Green Port ปีถัดไป"],
+  bp:["กทท. เป็น Best Practice ในกลุ่มอย่างไร้ข้อกังขา! คะแนน 2.8750 นำหน้า รฟม. (2.7500) และ กทพ. (2.3333) เพราะมีโครงการ Green IT ที่จับต้องได้จริง","จุดเดียวที่ต้องเปลี่ยน: ปรับวิธีทำรายงานผล — นำตัวเลขค่าไฟที่ลดลงหรือคาร์บอนที่หายไป มาตั้งเป็น Leading/Lagging Indicators และ Outcome ตาม TRIS คาดหวัง"]}
+  ]
+} };
+let curDim = 'dt';
+let focusId = null;
+const targets = {dt:{}};
+const clChecked = {};
+// ── DT Checkbox State (in-session tracking) ──────────────
+const dtChecked={};
+DATA.dt.subs.forEach(s=>{
+  dtChecked[s.id]={};
+  [1,2,3,4,5].forEach(L=>{dtChecked[s.id][L]={};});
+});
+// ── Dimension Radio State (0 / 0.5 / 1.0 per Level) ──────────────────
+const dtDimRad={};
+DATA.dt.subs.forEach(s=>{
+  dtDimRad[s.id]={1:0,2:0,3:0,4:0,5:0};
+});
+function dtSetDim(sid,L,val){
+  if(!dtDimRad[sid]) dtDimRad[sid]={};
+  dtDimRad[sid][L]=Number(val);
+  try{
+    const allState={ck:dtChecked,rad:dtDimRad};
+    localStorage.setItem('dt_ck_69',JSON.stringify(allState));
+  }catch(e){}
+  renderAll();
+}
+function dtToggleMR(id,L,key,val){
+  if(!dtChecked[id]) dtChecked[id]={};
+  if(!dtChecked[id][L]) dtChecked[id][L]={};
+  dtChecked[id][L][key]=val;
+  try{
+    const allState={ck:dtChecked,rad:dtDimRad};
+    localStorage.setItem('dt_ck_69',JSON.stringify(allState));
+  }catch(e){}
+}
+function dtGetChk(id,L,key){
+  return !!(dtChecked[id]&&dtChecked[id][L]&&dtChecked[id][L][key]);
+}
+function dtClearAll(){
+  DATA.dt.subs.forEach(s=>{
+    dtChecked[s.id]={};
+    [1,2,3,4,5].forEach(L=>{dtChecked[s.id][L]={};});
+    dtDimRad[s.id]={1:0,2:0,3:0,4:0,5:0};
+  });
+  try{localStorage.removeItem('dt_ck_69');}catch(e){}
+  renderAll();
+}
+// Load saved state
+(function dtLoad(){
+  try{
+    const saved=localStorage.getItem('dt_ck_69');
+    if(!saved) return;
+    const all=JSON.parse(saved);
+    if(all.ck) Object.assign(dtChecked,all.ck);
+    if(all.rad) Object.keys(all.rad).forEach(sid=>{
+      dtDimRad[sid]=Object.assign({1:0,2:0,3:0,4:0,5:0},all.rad[sid]);
+    });
+  }catch(e){}
+})();
+
+Object.keys(DATA).forEach(dk => { DATA[dk].subs.forEach(s => { targets[dk][s.id] = s.s68; }); });
+
+const smState={};
+if(DATA.sm){DATA.sm.subs.forEach(s=>{
+  smState[s.id]={
+    minReqChecked:{1:{},2:{},3:{},4:{},5:{}},  // {levelIdx: {reqIdx: bool}}
+    dimMult:{1:1,2:1,3:1,4:1,5:1},             // multiplier for standard mode
+    subCompChecked:{1:[],2:[],3:[],4:[],5:[]}  // booleans for fractional
+  };
+  // init subComp arrays
+  if(s.subComps) Object.keys(s.subComps).forEach(L=>{
+    smState[s.id].subCompChecked[L]=s.subComps[L].map(()=>false);
+  });
+});}
+
+const cmState={};
+if(DATA.cm){DATA.cm.subs.forEach(s=>{
+  cmState[s.id]={
+    minReqChecked:{1:{},2:{},3:{},4:{},5:{}},
+    subCompChecked:{},
+    dimMult:{1:0,2:0,3:0,4:0,5:0}
+  };
+  for(let L=1;L<=5;L++){
+    cmState[s.id].minReqChecked[L]=(s.minReqs[L]||[]).map(()=>false);
+    cmState[s.id].subCompChecked[L]=(s.subComps&&s.subComps[L])?s.subComps[L].map(()=>false):[];
+  }
+});
+// Init CM targets
+DATA.cm.subs.forEach(s=>{targets.cm[s.id]=s.s68;});}
+
+
+
+function smCalcLevel(id,L){
+  const s=DATA.sm.subs.find(x=>x.id===id);
+  const st=smState[id];
+  // Check all min reqs for this level
+  const mrs=s.minReqs[L]||[];
+  const allMR=mrs.every((_,i)=>st.minReqChecked[L][i]);
+  if(!allMR) return 0;
+  // Dim multiplier
+  if(s.subComps&&s.subComps[L]&&s.subComps[L].length>0){
+    const checked=st.subCompChecked[L].filter(Boolean).length;
+    return checked/s.subComps[L].length;
+  }
+  return st.dimMult[L]||0;
+}
+function smCalcRaw(id){
+  let total=0;
+  for(let L=1;L<=5;L++){
+    const lScore=smCalcLevel(id,L);
+    total+=lScore;
+    if(lScore===0) break; // sequential gating
+  }
+  return total;
+}
+function smUpdateTarget(id){
+  const raw=smCalcRaw(id);
+  targets.sm[id]=raw;
+}
+
+function subs(){return DATA[curDim].subs;}
+function orig(){return DATA[curDim].orig;}
+function sClass(st){return st==='เสร็จแล้ว'?'s2':st==='กำลังดำเนินการ'?'s1':'s0';}
+function sIcon(st){return st==='เสร็จแล้ว'?'✓':st==='กำลังดำเนินการ'?'●':'○';}
+function fmt(n){return n.toFixed(4);}
+function calcGroupScore(gid){const ss=subs().filter(s=>s.grp===gid);return ss.reduce((a,s)=>a+s.w*targets[curDim][s.id],0)/ss[0].gw;}
+function calcTotal(){
+  const tw=subs().reduce((a,s)=>a+s.w,0);
+  if(curDim==='sm'){
+    return subs().reduce((a,s)=>{
+      const raw=smCalcRaw(s.id);
+      return a+s.w/tw*raw;
+    },0);
+  }
+  if(curDim==='cm'){
+    return subs().reduce((a,s)=>{
+      const raw=cmCalcRaw(s.id);
+      return a+s.w/tw*raw;
+    },0);
+  }
+  return subs().reduce((a,s)=>a+s.w/tw*targets[curDim][s.id],0);
+}
+function dotColor(id){
+  const s=subs().find(x=>x.id===id);
+  const t=curDim==='sm'?smCalcRaw(id):curDim==='cm'?cmCalcRaw(id):targets[curDim][id];
+  const diff=t-s.s68;
+  if(diff<0.01)return 'dg';if(diff<0.5)return 'da';return 'dr';
+}
+
+function switchDim(dim){
+  curDim=dim;focusId=null;
+  ['hcm','im','sp','ia','sm','cm'].forEach(d=>document.getElementById('tab-'+d).classList.toggle('active',dim===d));
+  const lhd=document.getElementById('leftHd');
+  lhd.className='left-hd left-hd-dt';
+  const ftag=document.getElementById('frameTag');
+  ftag.style.background='#0d3a4a';
+  renderAll();
+}
+
+function renderLeft(){
+  const body=document.getElementById('leftBody');body.innerHTML='';
+  const d=DATA[curDim];
+  document.getElementById('dimTitle').textContent=d.dimName;
+  document.getElementById('dimOrig').textContent='ปัจจุบัน '+fmt(d.orig);
+  // Init SM targets on switch
+  if(curDim==='sm'){
+    DATA.sm.subs.forEach(s=>{ targets.sm[s.id]=smCalcRaw(s.id)||s.s68; });
+  }
+  if(curDim==='cm'){
+    DATA.cm.subs.forEach(s=>{ cmUpdateTarget(s.id); });
+  }
+  document.getElementById('totalLbl').textContent='คะแนนรวม '+d.dimId;
+  document.getElementById('totalOrig').textContent=fmt(d.orig);
+  const grps=[...new Set(subs().map(s=>s.grp))];
+  grps.forEach(gid=>{
+    const ss=subs().filter(s=>s.grp===gid);const first=ss[0];
+    const gs=calcGroupScore(gid);const diff=gs-first.gs68;const cc=diff<-0.001?'cr':diff>0.001?'ct':'cn';
+    const gDiv=document.createElement('div');gDiv.className='grp';
+    gDiv.innerHTML=`<span class="grp-id">${gid}</span><span class="grp-name">${first.gname}</span><span class="grp-wt">(${first.gw}%)</span><div class="grp-scores"><span class="chip cn" style="font-size:10px;">${fmt(first.gs68)}</span><span style="color:#999;font-size:10px;">→</span><span class="chip ${cc}" style="font-size:10px;" id="gs-${curDim}-${gid}">${fmt(gs)}</span></div>`;
+    body.appendChild(gDiv);
+    ss.forEach(s=>{
+      const fc='focus-'+curDim;
+      const row=document.createElement('div');row.className='sub'+(focusId===s.id?' '+fc:'');row.id='subrow-'+s.id;
+      const linkLevels=[...new Set((s.links||[]).map(l=>l.level))].sort();
+      const linkPill=linkLevels.length>0&&curDim==='cm'?` <a href="https://pdee-hub.github.io/Enablers-Link-Document-69/" target="_blank" class="cm-link-pill">🔗 ${linkLevels.map(l=>'L'+l).join(' · ')}</a>`:'';
+      const isCmOrSm=curDim==='cm'||curDim==='sm'||curDim==='dt';
+      const tgtLbl=isCmOrSm?'คำนวณ':'เป้า';
+      const tgtVal=curDim==='sm'?fmt(smCalcRaw(s.id)):curDim==='cm'?fmt(cmCalcRaw(s.id)):fmt(targets[curDim][s.id]);
+      row.innerHTML=`<div class="sub-left"><div class="sub-meta"><span class="sub-num">${s.id}</span><span class="sub-name">${s.name}</span><span class="sub-wt">(${s.w}%)</span><span class="sub-now">ปี 68: ${fmt(s.s68)}</span>${linkPill}</div></div><div class="sub-target" id="st-${s.id}"><span class="target-lbl">${tgtLbl}</span><input class="target-inp" id="ti-${s.id}" type="text" value="${tgtVal}" style="border-color:#ccc" ${isCmOrSm?'readonly':''}><span class="dot ${dotColor(s.id)}" id="dot-${s.id}"></span></div>`;
+      row.addEventListener('click',()=>{focusId=s.id;renderAll();});
+      body.appendChild(row);
+      if(curDim==='cm') cmColorSubTarget(s.id);
+      if(curDim!=='sm'&&curDim!=='cm'){
+        const inp=row.querySelector('.target-inp');
+        inp.addEventListener('input',e=>{const v=parseFloat(e.target.value);if(!isNaN(v)&&v>=1&&v<=5){targets[curDim][s.id]=v;updateScores();}});
+        inp.addEventListener('click',e=>e.stopPropagation());
+      }
+      const strip=document.createElement('div');strip.className='sstrip';
+      strip.innerHTML=`<span class="sbadge ${sClass(s.status)}">${sIcon(s.status)} ${s.status}</span>`+(s.statusNote?`<span class="snote">${s.statusNote}</span>`:'<span class="snote" style="color:#ccc;">ยังไม่มีข้อมูล</span>');
+      strip.addEventListener('click',()=>{focusId=s.id;renderAll();});
+      body.appendChild(strip);
+    });
+  });
+}
+
+function updateScores(){
+  const grps=[...new Set(subs().map(s=>s.grp))];
+  grps.forEach(gid=>{
+    const gs=calcGroupScore(gid);const diff=gs-subs().filter(s=>s.grp===gid)[0].gs68;
+    const el=document.getElementById('gs-'+curDim+'-'+gid);
+    if(el){el.textContent=fmt(gs);el.className='chip '+(diff<-0.001?'cr':diff>0.001?'ct':'cn');}
+  });
+  subs().forEach(s=>{const d=document.getElementById('dot-'+s.id);if(d)d.className='dot '+dotColor(s.id);});
+  // Refresh SM left panel score displays
+  if(curDim==='sm'){
+    DATA.sm.subs.forEach(s=>{
+      smUpdateTarget(s.id);
+      const el=document.getElementById('sm-tgt-'+s.id);
+      if(el) el.textContent=fmt(targets.sm[s.id]);
+      const dot=document.getElementById('dot-'+s.id);
+      if(dot) dot.className='dot '+dotColor(s.id);
+    });
+  }
+  if(curDim==='cm'){
+    DATA.cm.subs.forEach(s=>{
+      cmUpdateTarget(s.id);
+      const inp=document.getElementById('ti-'+s.id);
+      if(inp) inp.value=fmt(cmCalcRaw(s.id));
+      const dot=document.getElementById('dot-'+s.id);
+      if(dot) dot.className='dot '+dotColor(s.id);
+      cmColorSubTarget(s.id);
+    });
+  }
+  const total=calcTotal();const delta=total-orig();
+  document.getElementById('totalChip').textContent='คาดการณ์ '+fmt(total);
+  document.getElementById('totalChip').className='chip '+(delta>0?'ct':delta<0?'cr':'cn');
+  document.getElementById('totalFooter').textContent=fmt(total);
+  document.getElementById('totalFooter').className='chip '+(delta>0?'ct':delta<0?'cr':'cn');
+  document.getElementById('deltaChip').textContent=(delta>=0?'+':'')+fmt(delta)+' pts';
+  document.getElementById('deltaChip').style.color=delta>0?'#1a9a50':delta<0?'#c03020':'#888';
+  document.getElementById('deltaFooter').textContent=(delta>=0?'+':'')+fmt(delta);
+  document.getElementById('deltaFooter').style.color=delta>0?'#5fcf8a':delta<0?'#f0806a':'#888';
+}
+
+
+function renderSMSimulator(s){
+  const id=s.id;
+  const state=smState[id];
+  // Calculate scores per level with gating
+  const lvlScores=[]; let stopped=false;
+  for(let L=1;L<=5;L++){
+    if(stopped){lvlScores.push({score:0,blocked:true,passedMR:false,mult:0});continue;}
+    const mrs=s.minReqs[L]||[];
+    const passedMR=mrs.length===0||mrs.every((_,i)=>state.minReqChecked[L][i]);
+    let mult=0;
+    if(passedMR){
+      if(s.subComps&&s.subComps[L]&&s.subComps[L].length>0){
+        const checked=state.subCompChecked[L].filter(Boolean).length;
+        mult=checked/s.subComps[L].length;
+      } else { mult=state.dimMult[L]||0; }
+    }
+    const score=passedMR?mult:0;
+    lvlScores.push({score,blocked:false,passedMR,mult});
+    if(score===0) stopped=true;
+  }
+  const rawTotal=lvlScores.reduce((a,x)=>a+x.score,0);
+  const wtScore=rawTotal*(s.w/100);
+
+  // Render each level
+  const levelDimLabels=s.dimLevels||[];
+  // Map: if dimLevels has 5 items → L1-L5; if 4 items, first covers L1-L2
+  function getDimLabel(L){
+    if(levelDimLabels.length>=5) return levelDimLabels[L-1]||'';
+    if(levelDimLabels.length===4){
+      if(L<=2) return levelDimLabels[0]||'';
+      return levelDimLabels[L-2]||'';
+    }
+    return levelDimLabels[L-1]||'';
+  }
+
+  let lvlHTML='';
+  lvlScores.forEach((ls,i)=>{
+    const L=i+1;
+    const dl=getDimLabel(L);
+    const mrs=s.minReqs[L]||[];
+    const hasSub=s.subComps&&s.subComps[L]&&s.subComps[L].length>0;
+    const subs=hasSub?s.subComps[L]:[];
+    const passTag=ls.blocked?`<span class="sm-lvl-pass sm-skip">ล็อค</span>`:ls.passedMR?`<span class="sm-lvl-pass sm-pass">ผ่าน</span>`:`<span class="sm-lvl-pass sm-fail">ไม่ผ่าน</span>`;
+    const scoreTag=`<span style="font-size:11px;font-weight:700;color:${ls.score>0?'#1a7a4a':'#c03020'};">${ls.score.toFixed(4)}</span>`;
+
+    // Min Req checkboxes
+    let mrHTML='';
+    if(mrs.length>0){
+      mrHTML=`<div class="sm-sect-lbl">🔒 Minimum Requirement (L${L})</div>`;
+      mrs.forEach((txt,ri)=>{
+        const chk=state.minReqChecked[L][ri]?'checked':'';
+        mrHTML+=`<div class="sm-req-item"><input type="checkbox" id="mr-${id}-${L}-${ri}" ${chk} onchange="smToggleMR('${id}',${L},${ri},this.checked)"><label for="mr-${id}-${L}-${ri}">${txt}</label></div>`;
+      });
+    }
+
+    // Dim multiplier
+    let dimHTML=`<div class="sm-sect-lbl">📐 มิติที่ประเมิน (Dimension Multiplier)</div>`;
+    if(dl) dimHTML+=`<div style="font-size:10px;color:#555;margin-bottom:5px;line-height:1.4;">${dl}</div>`;
+    if(hasSub){
+      dimHTML+=`<div class="sm-frac-items">`;
+      subs.forEach((txt,si)=>{
+        const chk=(state.subCompChecked[L]||[])[si]?'checked':'';
+        const fc=subs.length>0?(state.subCompChecked[L]||[]).filter(Boolean).length:0;
+        dimHTML+=`<div class="sm-req-item"><input type="checkbox" id="sc-${id}-${L}-${si}" ${chk} onchange="smToggleSC('${id}',${L},${si},this.checked)"><label for="sc-${id}-${L}-${si}">${txt}</label></div>`;
+      });
+      const fc=(state.subCompChecked[L]||[]).filter(Boolean).length;
+      dimHTML+=`</div><div style="font-size:10px;color:#555;margin-top:3px;">✓ ${fc}/${subs.length} = <strong>${(subs.length?fc/subs.length:0).toFixed(4)}</strong></div>`;
+    } else {
+      const cv=state.dimMult[L]||0;
+      dimHTML+=`<div class="sm-radio-grp">`;
+      [[0,'0 — ไม่ผ่าน'],[0.5,'0.5 — บางส่วน'],[1,'1.0 — สมบูรณ์']].forEach(([v,lbl])=>{
+        const chk=cv===v?'checked':'';
+        dimHTML+=`<label><input type="radio" name="dim-${id}-${L}" value="${v}" ${chk} onchange="smSetDim('${id}',${L},${v})"> ${lbl}</label>`;
+      });
+      dimHTML+=`</div>`;
+    }
+
+    lvlHTML+=`<div class="sm-lvl-row${ls.blocked?' blocked':''}">
+      <div class="sm-lvl-hd">
+        <span class="sm-lvl-num">L${L}</span>
+        <span class="sm-lvl-desc" style="font-size:9px;">${dl.substring(0,80)}${dl.length>80?'…':''}</span>
+        <span style="display:flex;gap:4px;align-items:center;">${passTag}${scoreTag}</span>
+      </div>
+      <div class="sm-lvl-body">${mrHTML}${dimHTML}</div>
+    </div>`;
+  });
+
+  return `<div class="sm-sim">
+    <div class="sm-sim-hd"><span style="font-size:11px;padding:2px 8px;border-radius:6px;background:#8a5010;color:#fff;">Sim</span>Target Score Simulator — Sequential Gating</div>
+    <div class="sm-scope-box">${s.scopeNote||''}</div>
+    ${lvlHTML}
+    <div class="sm-total-bar">
+      <span class="sm-total-lbl">คะแนนดิบสะสม (0–5)</span>
+      <span class="sm-raw">${rawTotal.toFixed(4)}</span>
+      <span class="sm-wt">× ${s.w}% = <strong>${wtScore.toFixed(4)} pts</strong></span>
+    </div>
+  </div>`;
+}
+
+function smToggleMR(id,L,ri,val){
+  smState[id].minReqChecked[L][ri]=val;
+  smUpdateTarget(id);
+  if(curDim==='sm'&&focusId===id) renderAll(); else updateScores();
+}
+function smToggleSC(id,L,si,val){
+  if(!smState[id].subCompChecked[L]) smState[id].subCompChecked[L]=[];
+  smState[id].subCompChecked[L][si]=val;
+  smUpdateTarget(id);
+  if(curDim==='sm'&&focusId===id) renderAll(); else updateScores();
+}
+function smSetDim(id,L,val){
+  smState[id].dimMult[L]=parseFloat(val);
+  smUpdateTarget(id);
+  if(curDim==='sm'&&focusId===id) renderAll(); else updateScores();
+}
+
+
+// ── CM Simulator Functions ──────────────────────────────────────────────────
+function cmCalcLevel(id,L){
+  const st=cmState[id];
+  const s=DATA.cm.subs.find(x=>x.id===id);
+  const mrs=s.minReqs[L]||[];
+  const passedMR=mrs.length===0||mrs.every((_,i)=>st.minReqChecked[L][i]);
+  if(!passedMR) return 0;
+  if(s.subComps&&s.subComps[L]&&s.subComps[L].length>0){
+    const checked=(st.subCompChecked[L]||[]).filter(Boolean).length;
+    return checked/s.subComps[L].length;
+  }
+  return st.dimMult[L]||0;
+}
+function cmCalcRaw(id){
+  let raw=0; let stopped=false;
+  for(let L=1;L<=5;L++){
+    if(stopped){continue;}
+    const lScore=cmCalcLevel(id,L);
+    raw+=lScore;
+    if(lScore===0) stopped=true;
+  }
+  return raw;
+}
+function cmUpdateTarget(id){targets.cm[id]=cmCalcRaw(id)||DATA.cm.subs.find(x=>x.id===id).s68;}
+function cmToggleMR(id,L,ri,val){
+  cmState[id].minReqChecked[L][ri]=val;
+  cmUpdateTarget(id);
+  if(curDim==='cm'&&focusId===id) renderAll(); else updateScores();
+}
+function cmToggleSC(id,L,si,val){
+  if(!cmState[id].subCompChecked[L]) cmState[id].subCompChecked[L]=[];
+  cmState[id].subCompChecked[L][si]=val;
+  cmUpdateTarget(id);
+  if(curDim==='cm'&&focusId===id) renderAll(); else updateScores();
+}
+function cmSetDim(id,L,val){
+  cmState[id].dimMult[L]=parseFloat(val);
+  cmUpdateTarget(id);
+  if(curDim==='cm'&&focusId===id) renderAll(); else updateScores();
+}
+
+// ── CM sub-target score box coloring ──────────────────────────────────────────
+function cmColorSubTarget(id){
+  const raw=cmCalcRaw(id);
+  const stDiv=document.getElementById('st-'+id);
+  const inp=document.getElementById('ti-'+id);
+  const dot=document.getElementById('dot-'+id);
+  if(!stDiv||!inp) return;
+  // Hide dot for CM — background color conveys status already
+  if(dot) dot.style.display='none';
+  // Score gradient: 0-2=red, 2-3=red-mid, 3-4=yellow, 4-5=green, 5=deep green
+  let bg, color;
+  if(raw >= 5.0)      { bg='#1B7B50'; color='#fff'; }
+  else if(raw >= 4.0) { bg='#51BF8E'; color='#0D3D26'; }
+  else if(raw >= 3.0) { bg='#F8BD21'; color='#4A3200'; }
+  else if(raw >= 2.0) { bg='#FF6766'; color='#fff'; }
+  else if(raw >  0)   { bg='#FFACAB'; color='#7A1010'; }
+  else                { bg=''; color=''; }
+  stDiv.style.background=bg;
+  stDiv.style.borderLeftColor=bg||'#d4d0c8';
+  inp.style.background='transparent';
+  inp.style.border=bg?'none':'';
+  inp.style.color=color||'#1E293B';
+  inp.style.fontWeight=bg?'700':'';
+}
+
+function toggleLvlDetail(id,L){
+  const panel=document.getElementById('lvld-'+id+'-'+L);
+  const btn=document.getElementById('lvlbtn-'+id+'-'+L);
+  if(!panel||!btn) return;
+  const open=panel.classList.toggle('open');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'▲':'▼';
+}
+
+// ── Extract short Key Takeaway from dimLevel string ──────────────────────────
+// Pattern: "Level N (KEY TAKEAWAY): full description..."
+function extractKeyTakeaway(dl){
+  const m=dl.match(/\(([^)]+)\)/);
+  return m?m[1]:dl.substring(0,30);
+}
+
+function renderCMSimulator(s){
+  const id=s.id;
+  const state=cmState[id];
+  const lvlScores=[]; let stopped=false;
+  for(let L=1;L<=5;L++){
+    if(stopped){lvlScores.push({score:0,blocked:true,passedMR:false,mult:0});continue;}
+    const mrs=s.minReqs[L]||[];
+    const passedMR=mrs.length===0||mrs.every((_,i)=>state.minReqChecked[L][i]);
+    let mult=0;
+    if(passedMR){
+      if(s.subComps&&s.subComps[L]&&s.subComps[L].length>0){
+        const checked=(state.subCompChecked[L]||[]).filter(Boolean).length;
+        mult=checked/s.subComps[L].length;
+      } else { mult=state.dimMult[L]||0; }
+    }
+    const score=passedMR?mult:0;
+    lvlScores.push({score,blocked:false,passedMR,mult});
+    if(score===0) stopped=true;
+  }
+  const rawTotal=lvlScores.reduce((a,x)=>a+x.score,0);
+  const wtScore=rawTotal*(s.w/50); // CM total weight = 50%
+
+  // Cross-link lookup: {level -> [dim, dim, ...]}
+  const linkMap={};
+  (s.links||[]).forEach(l=>{
+    if(!linkMap[l.level]) linkMap[l.level]=[];
+    linkMap[l.level].push(l.dim);
+  });
+
+  let lvlHTML='';
+  lvlScores.forEach((ls,i)=>{
+    const L=i+1;
+    const dl=s.dimLevels[L-1]||'';    const mrs=s.minReqs[L]||[];
+    const hasSub=s.subComps&&s.subComps[L]&&s.subComps[L].length>0;
+    const subList=hasSub?s.subComps[L]:[];
+    // ── CM Level status color system (0=red, 0.5=yellow, 1.0=green, blocked=gray) ──
+    const lvlBg = ls.blocked ? '#b0bec5'
+      : ls.score >= 1.0 ? '#51BF8E'
+      : ls.score > 0    ? '#F8BD21'
+      :                   '#FF6766';
+    const lvlColor = ls.blocked ? '#546e7a'
+      : ls.score >= 1.0 ? '#0D3D26'
+      : ls.score > 0    ? '#4A3200'
+      :                   '#fff';
+    const hdBg = ls.blocked ? '#f4f0e8'
+      : ls.score >= 1.0 ? '#e6f8f1'
+      : ls.score > 0    ? '#fef9e7'
+      :                   '#fff0ee';
+    const passTag = ls.blocked
+      ? '<span class="sm-lvl-pass sm-skip">ล็อค</span>'
+      : ls.score >= 1.0
+        ? '<span class="sm-lvl-pass" style="background:#51BF8E;color:#0D3D26;font-weight:700;">✓ ผ่าน</span>'
+        : ls.score > 0
+          ? '<span class="sm-lvl-pass" style="background:#F8BD21;color:#4A3200;font-weight:700;">◐ บางส่วน</span>'
+          : '<span class="sm-lvl-pass" style="background:#FF6766;color:#fff;font-weight:700;">✗ ไม่ผ่าน</span>';
+    const scoreColor = ls.blocked ? '#9ca3af'
+      : ls.score >= 1.0 ? '#0D3D26'
+      : ls.score > 0    ? '#4A3200'
+      :                   '#c0392b';
+    const scoreTag=`<span style="font-size:11px;font-weight:700;color:${scoreColor};">${ls.score.toFixed(4)}</span>`;
+    // Cross-link icon for this level
+    const lvlLinks=linkMap[L]||[];
+    const linkIcon=lvlLinks.length>0?`<a href="https://pdee-hub.github.io/Enablers-Link-Document-69/" target="_blank" class="cm-link-icon">🔗 ${lvlLinks.join(' · ')}</a>`:'';
+    let mrHTML='';
+    if(mrs.length>0){
+      mrHTML=`<div class="sm-sect-lbl">🔒 Minimum Requirement (L${L})</div>`;
+      mrs.forEach((txt,ri)=>{
+        const chk=state.minReqChecked[L][ri]?'checked':'';
+        mrHTML+=`<div class="sm-req-item"><input type="checkbox" id="cm-mr-${id}-${L}-${ri}" ${chk} onchange="cmToggleMR('${id}',${L},${ri},this.checked)"><label for="cm-mr-${id}-${L}-${ri}">${txt}</label></div>`;
+      });
+    }
+    let dimHTML=`<div class="sm-sect-lbl">📐 มิติที่ประเมิน (Dimension Multiplier)</div>`;
+    if(dl) dimHTML+=`<div style="font-size:10px;color:#555;margin-bottom:5px;line-height:1.4;">${dl}</div>`;
+    if(hasSub){
+      dimHTML+='<div class="sm-frac-items">';
+      subList.forEach((txt,si)=>{
+        const chk=(state.subCompChecked[L]||[])[si]?'checked':'';
+        dimHTML+=`<div class="sm-req-item"><input type="checkbox" id="cm-sc-${id}-${L}-${si}" ${chk} onchange="cmToggleSC('${id}',${L},${si},this.checked)"><label for="cm-sc-${id}-${L}-${si}">${txt}</label></div>`;
+      });
+      const fc=(state.subCompChecked[L]||[]).filter(Boolean).length;
+      dimHTML+=`</div><div style="font-size:10px;color:#555;margin-top:3px;">✓ ${fc}/${subList.length} = <strong>${(subList.length?fc/subList.length:0).toFixed(4)}</strong></div>`;
+    } else {
+      const cv=state.dimMult[L]||0;
+      dimHTML+='<div class="sm-radio-grp">';
+      [[0,'0 — ไม่ผ่าน'],[0.5,'0.5 — บางส่วน'],[1,'1.0 — สมบูรณ์']].forEach(([v,lbl])=>{
+        const chk=cv===v?'checked':'';
+        dimHTML+=`<label><input type="radio" name="cm-dim-${id}-${L}" value="${v}" ${chk} onchange="cmSetDim('${id}',${L},${v})"> ${lbl}</label>`;
+      });
+      dimHTML+='</div>';
+    }
+    const kt=extractKeyTakeaway(dl);
+    lvlHTML+=`<div class="sm-lvl-row${ls.blocked?' blocked':''}">      <div class="sm-lvl-hd" style="background:${hdBg};">        <span class="sm-lvl-num" style="background:${lvlBg};color:${lvlColor};">L${L}</span>        <span class="sm-lvl-desc"><span class="lvl-kt">(${kt})</span>${dl?`<button class="lvl-toggle" id="lvlbtn-${id}-${L}" onclick="event.stopPropagation();toggleLvlDetail('${id}',${L})">▼</button>`:''}        </span>        <span style="display:flex;gap:4px;align-items:center;">${linkIcon}${passTag}${scoreTag}</span>      </div>      ${dl?`<div class="sm-lvl-detail" id="lvld-${id}-${L}">${dl}</div>`:''}      <div class="sm-lvl-body">${mrHTML}${dimHTML}</div>    </div>`;
+  });
+  return `<div class="sm-sim">    <div class="sm-sim-hd"><span style="font-size:11px;padding:2px 8px;border-radius:6px;background:#0a8a7a;color:#fff;">Sim</span>Target Score Simulator — Sequential Gating</div>    <div class="sm-scope-box">${s.scopeNote||''}</div>    ${lvlHTML}    <div class="sm-total-bar">      <span class="sm-total-lbl">คะแนนดิบสะสม (0–5)</span>      <span class="sm-raw">${rawTotal.toFixed(4)}</span>      <span class="sm-wt">× ${s.w}% (CM 50%) = <strong>${wtScore.toFixed(4)} pts</strong></span>    </div>  </div>`;
+}
+
+function renderRight(){
+  const body=document.getElementById('rightBody');
+  if(!focusId){body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:13px;">คลิก sub-item ด้านซ้ายเพื่อดูรายละเอียด</div>';return;}
+  const s=subs().find(x=>x.id===focusId);if(!s){body.innerHTML='';return;}
+  const smSimHTML=curDim==='sm'?renderSMSimulator(s):curDim==='cm'?renderCMSimulator(s):curDim==='dt'?renderDTSimulator(s):'';
+  const tval=curDim==='sm'?smCalcRaw(s.id):curDim==='cm'?cmCalcRaw(s.id):targets[curDim][s.id];
+  // ── expandable text helper: >2 lines (140 chars) → show 15 chars + expand ──
+  let _eUid=0;
+  const EXP_LINE=140; // ~2 lines threshold
+  const EXP_PREV=15;  // preview chars
+  function expTxt(txt,lineMax=EXP_LINE,prevLen=EXP_PREV){
+    if(!txt||txt.length<=lineMax) return txt||'';
+    const id='ex'+(_eUid++);
+    const btnStyle='border:none;background:#d8eef8;cursor:pointer;color:#0a7a9a;font-size:10px;padding:0 5px;border-radius:8px;line-height:1.5;white-space:nowrap;';
+    return `<span id="${id}s">${txt.slice(0,prevLen)}<span style="color:#999;">…</span>&nbsp;<button onclick="document.getElementById('${id}s').style.display='none';document.getElementById('${id}f').style.display='inline';" style="${btnStyle}">▼</button></span><span id="${id}f" style="display:none;">${txt}&nbsp;<button onclick="document.getElementById('${id}f').style.display='none';document.getElementById('${id}s').style.display='inline';" style="${btnStyle}">▲</button></span>`;
+  }
+  const gH=(s.gaps||[]).map(g=>`<div class="box box-red" style="margin-bottom:6px;">• ${expTxt(g)}</div>`).join('');
+  const bH=(s.bp||[]).map(b=>`<div class="box box-teal" style="margin-bottom:5px;">${expTxt(b)}</div>`).join('');
+  const rH=(s.results||[]).map(r=>`<div class="match-row m-ok"><span>✓</span><span>${expTxt(r)}</span></div>`).join('');
+  const lH=(s.gaps||[]).slice(0,3).map(g=>`<div class="match-row m-no"><span>✗</span><span>${g.split(':')[0]}</span><span class="m-lvl" style="background:#fcd0cc;color:#7a1010;">Gap</span></div>`).join('');
+  const dH=(s.docs||[]).map(d=>`<div class="doc-row"><div class="doc-dot doc-new"></div><span style="flex:1;">${expTxt(d)}</span><span class="doc-status" style="background:#c0d0e8;color:#102848;">ต้องทำ</span></div>`).join('');
+  const eH=s.statusNote?`<div style="background:#f5f0fc;border-left:3px solid #c4b0e8;border-radius:0 5px 5px 0;padding:7px 10px;font-size:11px;line-height:1.6;color:#333;">${s.statusNote}</div>`:'<div style="color:#bbb;font-size:11px;font-style:italic;">ยังไม่มีข้อมูล — รอ admin อัปเดต</div>';
+
+  body.innerHTML=`
+    <div style="padding:6px 12px;font-size:11px;background:#edeae0;border-bottom:1px solid #d4d0c8;display:flex;align-items:center;gap:8px;flex-shrink:0;position:sticky;top:0;z-index:2;">
+      <span style="font-weight:700;color:#1c2b3a;">ข้อ ${s.id}</span><span style="color:#555;">${s.name}</span>
+      <span style="margin-left:auto;font-size:10px;background:#e0ddd4;color:#444;padding:1px 7px;border-radius:8px;">ปัจจุบัน ${fmt(s.s68)}</span>
+      <span style="font-size:10px;">→</span>
+      <span style="font-size:10px;background:#c5e8d5;color:#0a4a2a;padding:1px 7px;border-radius:8px;font-weight:700;">${(curDim==='sm'||curDim==='cm')?'คำนวณ ':'เป้า '}${fmt(tval)}</span>
+    </div>
+    ${smSimHTML}
+    <div class="frame"><div class="frame-hd fa-hd"><span class="ftag fa-tag">A</span><span style="color:#7a1010;">TRIS ต้องการ — ช่องว่างที่ต้องปิด</span></div><div class="frame-bd">${gH||'<div style="color:#999;">—</div>'}</div></div>
+    <div class="frame"><div class="frame-hd fb-hd"><span class="ftag fb-tag">B</span><span style="color:#0a4a20;">หน่วยงานอื่นทำอะไรในข้อนี้ (Best Practice)</span></div><div class="frame-bd">${bH||'<div style="color:#999;">—</div>'}</div></div>
+    <div class="frame"><div class="frame-hd fc-hd"><span class="ftag fc-tag">C</span><span style="color:#4a4a00;">กทท. ตอบอะไรไป</span></div><div class="frame-bd"><div class="box box-gray" style="margin-bottom:8px;">${expTxt((s.good||[''])[0]||'—',120)}</div><div style="font-size:10px;color:#888;margin-bottom:4px;font-weight:600;">ผลการดำเนินงานที่นำเสนอ:</div>${rH}<div style="font-size:10px;color:#888;margin:8px 0 4px;font-weight:600;">ช่องว่างที่ยังขาด:</div>${lH}</div></div>
+    <div class="frame"><div class="frame-hd fd-hd"><span class="ftag fd-tag">D</span><span style="color:#102848;">เอกสาร / หลักฐานที่ต้องเพิ่ม</span></div><div class="frame-bd">${dH||'<div style="color:#999;">—</div>'}</div></div>
+    <div class="frame" style="border-bottom:none;"><div class="frame-hd fe-hd"><span class="ftag fe-tag">E</span><span style="color:#2a1060;">สถานะการดำเนินงาน</span><span class="sbadge ${sClass(s.status)}" style="margin-left:auto;">${sIcon(s.status)} ${s.status}</span></div><div class="frame-bd">${eH}</div></div>`;
+}
+
+function toggleCL(subId,i,val){
+  if(!clChecked[subId]) clChecked[subId]=[];
+  clChecked[subId][i]=val;
+  const row=document.getElementById('clrow-'+subId+'-'+i);
+  if(!row) return;
+  if(val){
+    row.style.background='#E6F8F1';
+    row.style.borderLeft='3px solid #51BF8E';
+    row.style.borderRadius='5px';
+  } else {
+    row.style.background='#FFF0EE';
+    row.style.borderLeft='3px solid #FF6766';
+    row.style.borderRadius='5px';
+  }
+}
+
+function renderChecklist(){
+  if(!focusId){document.getElementById('clTitle').textContent='เลือก sub-item เพื่อดู Action Checklist';document.getElementById('clItems').innerHTML='';return;}
+  const s=subs().find(x=>x.id===focusId);if(!s)return;
+  document.getElementById('clTitle').textContent=`Action Checklist — ข้อ ${s.id} · เป้า ${fmt(curDim==='sm'?smCalcRaw(s.id):curDim==='cm'?cmCalcRaw(s.id):targets[curDim][s.id])}`;
+  if(!clChecked[s.id]) clChecked[s.id]=s.actions.map(()=>false);
+  document.getElementById('clItems').innerHTML=s.actions.map((a,i)=>{
+    const chk=clChecked[s.id][i];
+    const style=chk
+      ?'background:#E6F8F1;border-left:3px solid #51BF8E;border-radius:5px;padding:4px 8px;margin-bottom:4px;'
+      :'background:#FFF0EE;border-left:3px solid #FF6766;border-radius:5px;padding:4px 8px;margin-bottom:4px;';
+    return `<div class="cl-item" id="clrow-${s.id}-${i}" style="${style}"><input type="checkbox" id="cl-${s.id}-${i}" ${chk?'checked':''} onchange="toggleCL('${s.id}',${i},this.checked)"><label for="cl-${s.id}-${i}">${a}</label></div>`;
+  }).join('');
+}
+
+
+// ── DT Simulator (Reference Panel) ────────────────────
+function renderDTSimulator(s){
+  const sid=s.id;
+  const LINK_URL='https://pdee-hub.github.io/Enablers-Link-Document-69/';
+  const lbl=s.dimLevels||[];
+
+  // Dimension radio value for this sub-item/level
+  function radVal(L){ return (dtDimRad[sid]&&dtDimRad[sid][L]!==undefined)?Number(dtDimRad[sid][L]):0; }
+
+  // Maturity Gating: score = dimension radio (0 / 0.5 / 1.0 per level)
+  let cum=0, gated=false;
+  const lvlSc=[];
+  for(let L=1;L<=5;L++){
+    if(gated){lvlSc.push({sc:0,bl:true,ok:false,rv:0});continue;}
+    const rv=radVal(L);
+    const ok=(rv>=1.0);
+    cum+=rv;
+    lvlSc.push({sc:rv,bl:false,ok,rv});
+    if(!ok) gated=true;
+  }
+  const raw=cum;
+  const wt=raw*(s.w/100);
+
+  // Push computed score to targets + update UI
+  if(targets['dt']) targets['dt'][sid]=raw;
+  requestAnimationFrame(()=>{
+    const inp=document.getElementById('ti-'+sid);
+    if(inp){
+      inp.value=raw.toFixed(4);
+      inp.style.borderColor=raw>=4?'#2a8a4a':raw>=3?'#5a8a00':raw>=2?'#c07000':'#c03020';
+    }
+    const dot=document.getElementById('dot-'+sid);
+    if(dot) dot.className='dot '+(raw>=s.s68+0.005?'dot-up':raw<s.s68-0.005?'dot-dn':'dot-eq');
+  });
+
+  // Count minReq checkboxes (for progress display only)
+  function countL(L){
+    const mrs=(s.minReqs&&s.minReqs[L])||[];
+    let tot=0,chk=0;
+    mrs.forEach((txt,ri)=>{
+      const m=txt.match(/^(.+?:\s*)((?:\d+\)[\s\S]+))$/);
+      if(m){ m[2].split(/(?=\d+\))/).filter(p=>p.trim()).forEach((_,pi)=>{tot++;if(dtGetChk(sid,L,ri+'-'+pi))chk++;}); }
+      else { tot++;if(dtGetChk(sid,L,ri))chk++; }
+    });
+    return {tot,chk};
+  }
+
+  // Render minReq item (grouped or single)
+  function parseMR(txt,L,ri,bl){
+    const dis=bl?'disabled':'';
+    const m=txt.match(/^(.+?:\s*)((?:\d+\)[\s\S]+))$/);
+    if(m){
+      const header=m[1].trim();
+      const parts=m[2].split(/(?=\d+\))/).filter(p=>p.trim());
+      const cc=parts.filter((_,pi)=>dtGetChk(sid,L,ri+'-'+pi)).length;
+      let h=`<div class="sm-req-item" style="font-weight:600;color:#444;margin-bottom:2px;">
+        <span style="flex-shrink:0;color:#8a5010;font-size:12px;">●</span>
+        <span>${header} <span style="font-size:9px;color:#0d3a4a;font-weight:700;">${cc}/${parts.length}</span></span></div>`;
+      parts.forEach((part,pi)=>{
+        const id2=`mr-dt-${sid}-${L}-${ri}-${pi}`;
+        const ck=dtGetChk(sid,L,ri+'-'+pi)?'checked':'';
+        h+=`<div class="sm-req-item" style="padding-left:14px;">
+          <input type="checkbox" id="${id2}" ${ck} ${dis}
+            onchange="dtToggleMR('${sid}',${L},'${ri}-${pi}',this.checked);renderAll();"
+            style="flex-shrink:0;margin-top:1px;accent-color:#0d3a4a;">
+          <label for="${id2}">${part.trim()}</label></div>`;
+      });
+      return h;
+    }
+    const id2=`mr-dt-${sid}-${L}-${ri}`;
+    const ck=dtGetChk(sid,L,ri)?'checked':'';
+    return `<div class="sm-req-item">
+      <input type="checkbox" id="${id2}" ${ck} ${dis}
+        onchange="dtToggleMR('${sid}',${L},${ri},this.checked);renderAll();"
+        style="flex-shrink:0;margin-top:1px;accent-color:#0d3a4a;">
+      <label for="${id2}">${txt}</label></div>`;
+  }
+
+  // Build level HTML
+  let lvlHTML='';
+  lvlSc.forEach((ls,i)=>{
+    const L=i+1;
+    const dl=lbl[L-1]||'';
+    const mrs=(s.minReqs&&s.minReqs[L])||[];
+    const subs=(s.subComps&&s.subComps[L])||[];
+    const ints=(s.integLinks&&s.integLinks[L])||[];
+    const summ=(s.levelSumm&&s.levelSumm[L-1])||dl.substring(0,60);
+    const {tot,chk}=countL(L);
+
+    const intB=ints.map(d=>`<a href="${LINK_URL}" target="_blank"
+      style="font-size:9px;padding:1px 7px;border-radius:8px;background:#0d3a4a;
+      color:#90d0e8;font-weight:700;text-decoration:none;white-space:nowrap;">${d}</a>`).join('');
+
+    const xId=`lvlx-${sid}-${L}`;
+    const xBtn=dl?`<button onclick="event.stopPropagation();var e=document.getElementById('${xId}'),b=this;e.style.display=e.style.display==='none'?((b.textContent='▲'),'block'):((b.textContent='▼'),'none');"
+      style="border:none;background:none;cursor:pointer;font-size:10px;color:#0a7a9a;padding:0 3px;flex-shrink:0;">▼</button>`:'';
+    const xPanel=dl?`<div id="${xId}" style="display:none;padding:5px 8px 6px;background:#f0f8ff;
+      border-top:1px dashed #90c0e0;font-size:10px;color:#334155;line-height:1.6;">${dl}</div>`:'';
+
+    const hdBg=ls.bl?'#ede8e0':ls.ok?'#e0f5e8':ls.rv>0?'#fef8e8':'#f4f0e8';
+    const nBg=ls.bl?'#aaa':ls.ok?'#1a7a4a':ls.rv>0?'#c07000':'#0d3a4a';
+    const sCol=ls.bl?'#bbb':ls.rv>=1?'#1a7a4a':ls.rv>0?'#c07000':'#aaa';
+
+    // minReq section
+    let mrH='';
+    if(mrs.length){
+      const pct=tot>0?Math.round(chk/tot*100):0;
+      const barW=tot>0?Math.round(chk/tot*100):0;
+      mrH=`<div class="sm-sect-lbl">🔒 หลักฐานขั้นต่ำ (L${L}) <span style="color:#0d3a4a;">${chk}/${tot} (${pct}%)</span></div>
+        <div style="height:4px;background:#e0e8f0;border-radius:2px;margin-bottom:5px;">
+          <div style="height:4px;background:${chk===tot?'#1a7a4a':'#0d3a4a'};border-radius:2px;width:${barW}%;transition:width 0.3s;"></div>
+        </div>`;
+      mrs.forEach((txt,ri)=>{mrH+=parseMR(txt,L,ri,ls.bl);});
+    }
+
+    // Dimension self-assessment radio
+    const rv=ls.rv;
+    const dis=ls.bl?'disabled':'';
+    const radioOpts=[[0,'0 คะแนน — ไม่ครบ'],[0.5,'0.5 คะแนน — ทำได้บางส่วน'],[1,'1 คะแนน — ทำได้ครบตามมิติที่ประเมิน']];
+    let dimH=`<div class="sm-sect-lbl" style="margin-top:8px;">📐 มิติที่ประเมิน (L${L})</div>`;
+    if(dl) dimH+=`<div style="font-size:10px;color:#444;line-height:1.5;margin-bottom:6px;">${dl}</div>`;
+    dimH+=`<div style="display:flex;flex-direction:column;gap:4px;margin-bottom:4px;">`;
+    radioOpts.forEach(([v,lbl2])=>{
+      const ck=(rv===v)?'checked':'';
+      const col=v===1?'#1a7a4a':v===0.5?'#c07000':'#c03020';
+      dimH+=`<label style="display:flex;align-items:center;gap:5px;font-size:10px;
+        color:${ck?col:'#444'};cursor:${ls.bl?'not-allowed':'pointer'};
+        font-weight:${ck?'700':'400'};padding:3px 6px;border-radius:5px;
+        background:${ck?(v===1?'#e0f5e8':v===0.5?'#fef8e0':'#fee8e8'):'transparent'};
+        border:1px solid ${ck?(v===1?'#1a7a4a':v===0.5?'#c07000':'#c03020'):'transparent'};">
+        <input type="radio" name="dim-dt-${sid}-${L}" value="${v}" ${ck} ${dis}
+          onchange="dtSetDim('${sid}',${L},${v});"
+          style="accent-color:${col};flex-shrink:0;">
+        ${lbl2}</label>`;
+    });
+    dimH+=`</div>`;
+
+    // จุดดักคะแนน section
+    let subH='';
+    if(subs.length){
+      subH=`<div class="sm-sect-lbl" style="margin-top:6px;color:#7a2800;">⚠️ จุดดักคะแนน (L${L})</div>`;
+      subs.forEach(t=>{subH+=`<div style="font-size:10px;color:#7a3000;margin-bottom:4px;
+        padding:3px 6px 3px 10px;border-left:3px solid #f08040;line-height:1.4;">• ${t}</div>`;});
+    }
+
+    lvlHTML+=`<div class="sm-lvl-row${ls.bl?' blocked':''}">
+      <div class="sm-lvl-hd" style="background:${hdBg};">
+        <span class="sm-lvl-num" style="background:${nBg};">L${L}</span>
+        <span class="sm-lvl-desc" style="font-size:10px;flex:1;line-height:1.4;">${summ}</span>
+        <span style="display:flex;gap:3px;align-items:center;flex-shrink:0;">
+          ${xBtn}${intB}
+          <span style="font-size:10px;font-weight:700;color:${sCol};min-width:28px;text-align:right;">
+            ${ls.bl?'—':ls.rv.toFixed(2)}</span>
+        </span>
+      </div>
+      ${xPanel}
+      <div class="sm-lvl-body"${ls.bl?' style="pointer-events:none;opacity:0.4;"':''}>
+        ${mrH}${dimH}${subH}
+      </div>
+    </div>`;
+  });
+
+  return `<div class="sm-sim">
+    <div class="sm-sim-hd">
+      <span style="font-size:11px;padding:2px 8px;border-radius:6px;background:#0d3a4a;color:#90d0e8;">DT</span>
+      &nbsp;Target Score Simulator — Maturity Gating
+      <span style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+        <button onclick="dtClearAll()" style="font-size:9px;padding:1px 8px;border:1px solid #c0c0c0;
+          border-radius:6px;background:#fff;cursor:pointer;color:#888;">🗑 Clear</button>
+        <span style="font-size:11px;font-weight:700;color:#0d3a4a;">${raw.toFixed(4)} / 5.0000</span>
+      </span>
+    </div>
+    <div class="sm-scope-box">${s.scopeNote||''}</div>
+    ${lvlHTML}
+    <div class="sm-total-bar">
+      <span class="sm-total-lbl">คะแนนสะสม (0–5)</span>
+      <span class="sm-raw">${raw.toFixed(4)}</span>
+      <span class="sm-wt">× ${s.w}% = <strong>${wt.toFixed(4)} pts</strong></span>
+    </div>
+  </div>`;
+}
+
+function renderAll(){renderLeft();renderRight();renderChecklist();updateScores();}
+renderAll();
+</script>
+<script>
+// ════════════════════════════════════════════════════════
+// DT PATCH — scopeNote · dimLevels · minReqs · integLinks
+// ════════════════════════════════════════════════════════
+(function(){
+var dt=DATA.dt.subs;
+function h(id){return dt.find(function(s){return String(s.id)===String(id);});}
+var D={
+"1.1":{
+scopeNote:"ประเมินคุณภาพกรอบการกำกับดูแล DT ตั้งแต่การมีนโยบาย การจัดทำมาตรฐาน การถ่ายทอดสู่ภาคปฏิบัติ การวัดผลเชิงคุณค่า และการนำ Feedback ปรับปรุงแผนระยะยาว",
+dimLevels:["มีนโยบาย ทิศทาง และความตระหนักรู้ระดับผู้บริหาร","จัดทำมาตรฐานครอบคลุมรอบด้าน (คน เงิน งาน ความเสี่ยง)","ถ่ายทอดสู่ภาคปฏิบัติ มีส่วนร่วมทั่วองค์กร ลงมือทำจนเกิดหลักฐาน","วัดผลเชิงคุณค่า (Value Realization) — วัดผลกระทบทางธุรกิจ ไม่ใช่แค่กระบวนการ","เรียนรู้จากผลลัพธ์ สร้างนวัตกรรมกระบวนการ ป้อน Feedback ปรับปรุงแผนระยะยาว"],
+minReqs:{1:["Digital Governance Policy ที่ได้รับอนุมัติอย่างเป็นทางการ"],2:["คู่มือกระบวนการกำกับดูแล DT ครบตามเกณฑ์บังคับ: การจัดสรรงบลงทุน, EA, กลยุทธ์ไอที, การพัฒนาบุคลากร/วัฒนธรรมดิจิทัล, ความโปร่งใส/กฎหมาย (PDPA/Cyber), การบริหารความเสี่ยง"],3:["RACI Chart และแผนสื่อสาร","แบบสรุปผลการประเมินการรับรู้ผู้มีส่วนได้ส่วนเสีย","หลักฐาน Implementation: รายงาน IA หรือเอกสารพิสูจน์ว่านำระเบียบ IT ไปบังคับใช้จริงในหน่วยงานอื่น"],4:["Dashboard หรือรายงานวัดผล Outcome (ไม่ใช่ Output) ด้านประสิทธิผลการกำกับดูแล DT"],5:["รายงานประชุมคณะกรรมการฯ ที่นำ Outcome ทบทวนแผนปฏิบัติการดิจิทัล/กรอบนโยบาย","หลักฐานจัดเก็บองค์ความรู้ลงระบบ KM Portal"]},
+integLinks:{1:["CG"],2:["SP","HCM","RM&IC","IA"],3:["SCM"],4:["SP"],5:["KM&IM","SP"]},
+levelSumm:["จัดทำ Digital Governance Policy + ขออนุมัติผู้บริหารระดับสูง", "จัดทำคู่มือกำกับดูแล DT + ครอบคลุม EA, IT Strategy, PDPA, ความเสี่ยง", "จัดทำ RACI + ประเมินการรับรู้ + รวบรวมหลักฐาน Implementation จากฝ่ายอื่น", "จัดทำ Dashboard วัดผล Outcome + กำหนด Leading/Lagging Indicator", "นำ Outcome ทบทวนแผนดิจิทัล + จัดเก็บองค์ความรู้ลงระบบ KM"]},
+"1.2":{
+scopeNote:"ประเมินคุณภาพแผนปฏิบัติการดิจิทัลระยะ 3-5 ปี ครอบคลุม Strategic Alignment กับแผนวิสาหกิจ ความสมบูรณ์กระบวนการวางแผน การสื่อสารสู่ระดับปฏิบัติการ การวัด Outcome และ Agility",
+dimLevels:["Strategic Alignment: ทิศทางแผนไอทีสนับสนุนวิสัยทัศน์และยุทธศาสตร์หลักองค์กร","Process & Resource Planning: ความสมบูรณ์กระบวนการวางแผน เตรียมทรัพยากรพร้อมก่อนเริ่ม","Deployment & Execution: สื่อสารถ่ายทอดเป้าหมายสู่ระดับปฏิบัติการ และลงมือทำจริง","Performance Measurement: วัดผลสัมฤทธิ์เชิงคุณค่าที่ผลกระทบทางธุรกิจและบริการ","Agility & Continuous Improvement: ความยืดหยุ่นปรับตัว ใช้องค์ความรู้ปรับแผน"],
+minReqs:{1:["แผนปฏิบัติการดิจิทัลระยะ 3-5 ปี ที่ได้รับอนุมัติและสอดคล้องกับแผนยุทธศาสตร์"],2:["คู่มือกระบวนการจัดทำแผนดิจิทัล: ขั้นตอน ผู้รับผิดชอบ กรอบเวลา และการจัดสรรทรัพยากร (เงิน คน ระบบ)"],3:["Action Plan Deployment, เอกสาร RACI และแผนสื่อสาร","แบบสรุปผลการรับรู้","หลักฐาน Implementation: โครงการที่เริ่มดำเนินการจริงตามกรอบเวลา"],4:["Dashboard หรือรายงานติดตามผลที่แสดง Outcome รวมถึง Leading/Lagging Indicator"],5:["รายงานประชุม: วิเคราะห์ Root Cause กรณีแผนไม่บรรลุเป้า + Plan Revision + AAR/Lesson Learned ลงระบบ KM"]},
+integLinks:{1:["SP"],2:["HCM","RM&IC"],3:["SCM","HR (สื่อสาร)"],4:["SP"],5:["KM&IM","SP","RM&IC"]},
+levelSumm:["จัดทำแผนดิจิทัลระยะ 3-5 ปี + สอดคล้องกับแผนยุทธศาสตร์ + ขออนุมัติ", "จัดทำคู่มือกระบวนการวางแผน + ระบุขั้นตอน ผู้รับผิดชอบ กรอบเวลา ทรัพยากร", "จัดทำ Action Plan Deployment + RACI + แผนสื่อสาร + หลักฐาน Implementation", "จัดทำ Dashboard ติดตามผล Outcome + กำหนด Leading/Lagging Indicator", "วิเคราะห์ Root Cause + จัดทำ Plan Revision + บันทึก AAR ลงระบบ KM"]},
+"2.1":{
+scopeNote:"ประเมินความสมบูรณ์และการประยุกต์ใช้ EA ครอบคลุมตั้งแต่ Initiation ความครบถ้วน 5 Domains การนำ EA ลงสู่การปฏิบัติจริง (Enforceability) การวัดความคุ้มค่า (ROI/Value) และ Agility",
+dimLevels:["Initiation: มีกรอบคิดและทิศทางการทำ EA","Completeness & Standardization: EA ครบ 5 Domains (Business, Data, Application, Infrastructure, Security) + แผนเปลี่ยนผ่าน PPT","Deployment & Enforceability: EA เป็น 'กฎเหล็ก' — ทุกโครงการดิจิทัลต้องผ่าน EA Compliance ก่อนอนุมัติ","Value Realization: วัดความคุ้มค่า (ROI) ทั้ง Business Value และ Public Value","Agility & Knowledge: EA ถูกปรับปรุงทันสมัยเมื่อธุรกิจเปลี่ยน"],
+minReqs:{1:["นโยบายหรือ Framework การจัดทำ EA ที่ได้รับอนุมัติจากผู้บริหาร"],2:["คู่มือ EA: As-Is และ To-Be ครบ 5 Domains + แผน Digital Transformation ครอบคลุม PPT (People, Process, Technology) + แนวทางประเมินความคุ้มค่า"],3:["RACI, แผนสื่อสาร, แบบประเมินการรับรู้","หลักฐาน Implementation: EA Compliance Checklist ที่พิสูจน์ว่า EA ถูกนำไปบังคับใช้คัดกรองโครงการ IT จริง"],4:["Dashboard หรือรายงาน Outcome: Business Value (รายได้เพิ่ม/ลดต้นทุน) และ Public Value"],5:["รายงานการนำผลประเมิน EA ทบทวนปรับปรุงแผนแม่บทดิจิทัล + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["SP","HCM","RM&IC"],3:["HCM","DT ข้อ 2.2 (PM)"],4:["SP"],5:["SP"]},
+levelSumm:["จัดทำนโยบาย/Framework EA + ขออนุมัติผู้บริหาร", "จัดทำ EA As-Is/To-Be ครบ 5 Domains + แผนเปลี่ยนผ่าน PPT + ประเมินความคุ้มค่า", "จัดทำ RACI + แผนสื่อสาร + EA Compliance Checklist สำหรับคัดกรองโครงการ IT", "จัดทำรายงาน Outcome ครอบคลุม Business Value และ Public Value", "นำผลประเมิน EA ทบทวนแผนแม่บทดิจิทัล + จัดเก็บลงระบบ KM"]},
+"2.2":{
+scopeNote:"ประเมินความสมบูรณ์กระบวนการบริหารโครงการดิจิทัล ครอบคลุม Framework, Project Life Cycle, Execution, Value Realization และ Continuous Improvement",
+dimLevels:["Framework: มีแนวทางมาตรฐานสำหรับบริหารโครงการ","Project Life Cycle: ครบทุกขั้นตอน Initiate > Plan > Execute > Monitor > Close","Communication & Execution: โครงการต้องเดินตามกฎจริง ไม่ใช่มีคู่มือแต่ทำจริงใช้ทางลัด","Value Realization: ไม่ใช่แค่วัดว่าโครงการเสร็จทันเวลา แต่วัดว่าสร้างประโยชน์จริง","Continuous Improvement: เรียนรู้จากความผิดพลาด จัดการองค์ความรู้"],
+minReqs:{1:["คู่มือการบริหารโครงการ DT ที่ได้รับอนุมัติอย่างเป็นทางการ"],2:["คู่มือครบ Full Project Life Cycle: ก่อนเริ่ม (TOR, ROI/แบบ 68ก.), วางแผน, จัดซื้อ (พ.ร.บ. 2560), ดำเนินการ (Gantt, รายงานความคืบหน้า), ปิดโครงการ (Lesson Learned)"],3:["Stakeholder RACI, แผนสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: Project Portfolio พร้อมลายเซ็นรับรองตามขั้นตอนในคู่มือเป๊ะๆ"],4:["Dashboard/รายงาน Project Outcome ที่แสดงว่าโครงการสร้าง Outcome ทางธุรกิจได้จริงตาม 68ก."],5:["รายงาน AAR/Lesson Learned พร้อมหลักฐานการนำบทเรียนไปอัปเดตคู่มือบริหารโครงการ"]},
+integLinks:{2:["SP","SCM (พัสดุ)","RM&IC"],3:["SCM","HCM"],4:["SCM"],5:["KM&IM","SP"]},
+levelSumm:["จัดทำคู่มือบริหารโครงการ DT + ขออนุมัติอย่างเป็นทางการ", "จัดทำคู่มือครอบคลุม Full Project Life Cycle + TOR, ROI, ความเสี่ยง, Lesson Learned", "จัดทำ RACI + แผนสื่อสาร + Project Portfolio พร้อมลายเซ็นรับรองครบขั้นตอน", "จัดทำ Project Outcome Dashboard + พิสูจน์ Outcome ทางธุรกิจตาม 68ก.", "จัดทำ AAR/Lesson Learned + นำบทเรียนอัปเดตคู่มือบริหารโครงการ"]},
+"2.3":{
+scopeNote:"ประเมินความสมบูรณ์ QMS สำหรับโครงการ DT ครอบคลุม Policy ความครบถ้วน QMS Process & Audit Planning การลงมือ (Execution) Value Realization และ Continuous Improvement",
+dimLevels:["Policy: มีนโยบายให้ความสำคัญกับคุณภาพการพัฒนาระบบดิจิทัล","Process & Audit Planning: ความครบถ้วนของมาตรฐาน QA/QC ตลอดวงจรชีวิตโครงการ และแผน Computer Audit","Execution & Assurance: ลงมือปฏิบัติตามมาตรฐาน โครงการ IT ต้องผ่านการตรวจ QA/QC จริง","Value Realization: วัดว่าระบบที่ได้มาตรฐานช่วยลดข้อผิดพลาดหรือเพิ่มความพึงพอใจ","Continuous Improvement: นำ Audit Findings มาอุดช่องโหว่ QMS"],
+minReqs:{1:["นโยบาย/Framework QMS ที่ได้รับอนุมัติจากผู้บริหาร"],2:["คู่มือ QMS Manual: QMS Standards, เครื่องมือ/เทคนิค, Quality Management Plan, QMS Good Practices, คู่มือ Digital/Computer Audit"],3:["RACI, แผนสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: Digital Audit Report จากฝ่ายตรวจสอบที่เกิดขึ้นจริง หรือ QA/QC Report ในโครงการ IT"],4:["Dashboard หรือรายงาน Outcome ของการจัดการคุณภาพ ที่มี Leading/Lagging Indicator"],5:["รายงาน AAR จาก Audit Findings นำไปปรับปรุงคู่มือ/มาตรฐาน QMS + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["IA","RM&IC"],3:["IA","SCM"],4:["SP"],5:["KM&IM"]},
+levelSumm:["จัดทำนโยบาย/Framework QMS + ขออนุมัติผู้บริหาร", "จัดทำ QMS Manual + กำหนด QA/QC Standards + Quality Management Plan + Digital Audit", "จัดทำ RACI + แผนสื่อสาร + ดำเนินการ Digital Audit จริง + รายงาน QA/QC", "จัดทำ Dashboard ด้านคุณภาพ + กำหนด Leading/Lagging Indicator", "นำ Audit Findings ปรับปรุง QMS + จัดเก็บ AAR ลงระบบ KM"]},
+"3.1":{
+scopeNote:"ประเมินผลสัมฤทธิ์และคุณค่าของการบูรณาการเชื่อมโยงข้อมูล ครอบคลุม Policy (Open Government), Process & Standardization, Execution & Collaboration, Value Realization (Public Value) และ Agility",
+dimLevels:["Policy: ความตั้งใจผู้บริหารในการเปิดกว้าง (Open Government) เชื่อมโยงข้อมูลกับหน่วยงานอื่น","Process & Standardization: ครบถ้วนทั้ง Partner Selection Criteria และ Data Classification","Execution & Collaboration: ระบบ IT เชื่อมต่อกันได้ (Interoperability) ทำงานร่วมกับหน่วยงานอื่นราบรื่น","Value Realization: วัด Public Value เช่น ประชาชนหรือลูกค้าได้ประโยชน์อะไร หรือลดต้นทุนได้เท่าไร","Agility & Innovation: เมื่อมีการเปลี่ยนนโยบายภาครัฐ ปรับกระบวนการเชื่อมโยงข้อมูลได้รวดเร็ว"],
+minReqs:{1:["นโยบายการบูรณาการเชื่อมโยงข้อมูลที่ได้รับอนุมัติจากผู้บริหาร"],2:["คู่มือ Government Integration Manual: 1) การจัดประเภทข้อมูล 2) แนวทาง Partner Selection 3) แผนทบทวนโครงการซ้ำซ้อน"],3:["RACI ตลอดห่วงโซ่การเชื่อมโยงข้อมูล, แผนสื่อสาร, สรุปผลการรับรู้","หลักฐาน Implementation: สัญญา/MOU แลกเปลี่ยนข้อมูลกับหน่วยงานภายนอก + หลักฐานเชิงเทคนิค (API Logs)"],4:["Dashboard หรือรายงาน Outcome ที่สะท้อน Public Value + มี Leading/Lagging Indicators"],5:["รายงาน AAR หรือรายงานประชุมที่นำ Outcome ทบทวนแผนแม่บทฯ + จัดเก็บ Best Practice ลงระบบ KM"]},
+integLinks:{2:["SP","SCM"],3:["สคร.","CG"],4:["SP"],5:["DT ข้อ 4.1 (Data Governance)","KM"]},
+levelSumm:["จัดทำนโยบายการบูรณาการเชื่อมโยงข้อมูล + ขออนุมัติผู้บริหาร", "จัดทำคู่มือ Government Integration + กำหนดการจัดประเภทข้อมูล + Partner Selection", "จัดทำ RACI + แผนสื่อสาร + ลงนาม MOU + รวบรวม API Logs เป็นหลักฐาน", "จัดทำ Dashboard Outcome สะท้อน Public Value + กำหนด Leading/Lagging Indicator", "จัดทำ AAR + นำ Outcome ทบทวนแผนแม่บทฯ + จัดเก็บ Best Practice ลงระบบ KM"]},
+"4.1":{
+scopeNote:"ประเมินความสมบูรณ์ระบบนิเวศการกำกับดูแลข้อมูลและการประยุกต์ใช้ Big Data ครอบคลุม Data as an Asset, Structure & Standardization, Execution & Awareness, Data Monetization และ Continuous Improvement",
+dimLevels:["Policy: ประกาศเจตนารมณ์ว่าข้อมูลเป็นทรัพย์สินมีค่าขององค์กร (Data as an Asset)","Structure & Standardization: ครบถ้วนทั้ง Data Governance Council, Steward, Owner, Catalog, Dictionary, Classification, Quality Assessment","Execution & Awareness: พนักงานเข้าใจหน้าที่ตนเองในฐานะผู้สร้าง/ผู้ใช้ข้อมูล ข้อมูลในระบบหลักถูกจัดระเบียบตามมาตรฐาน","Value Realization: วัดมูลค่าเพิ่มจากข้อมูล — Big Data ที่มีคุณภาพช่วยลดต้นทุนหรือเพิ่มโอกาสทางธุรกิจอย่างไร","Continuous Improvement: ปรับตัวยกระดับมาตรฐานข้อมูลให้ทันเทคโนโลยี"],
+minReqs:{1:["Data Governance Policy ที่ได้รับอนุมัติจากผู้บริหารระดับสูง"],2:["คู่มือกำกับดูแลข้อมูล: Data Governance Council/Steward/Owner, Data Catalog & Dictionary, Data Classification, Data Quality Assessment, ROI"],3:["RACI ตลอดวงจรชีวิตข้อมูล, แผนสื่อสาร, รายงานผลประเมินประสิทธิภาพการสื่อสาร","หลักฐาน Implementation: แฟ้มสรุปผลจัดทำ Data Catalog, รายงาน Data Cleansing หรือประเมินคุณภาพข้อมูลระบบหลัก (ERP, VCMS, CTMS)"],4:["Dashboard หรือรายงาน Outcome ของการใช้ Big Data พร้อม Leading/Lagging Indicator"],5:["รายงาน AAR หรือรายงานประชุมที่นำ Outcome ทบทวนนโยบาย/คู่มือ + จัดเก็บองค์ความรู้ลงระบบ KM"]},
+integLinks:{2:["SP","RM&IC"],3:["ทุกฝ่าย (Data Owner)","HCM"],4:["SCM","IM (นวัตกรรม)"],5:["KM&IM"]},
+levelSumm:["จัดทำ Data Governance Policy + ขออนุมัติผู้บริหารระดับสูง", "จัดตั้ง Data Governance Council/Steward/Owner + จัดทำ Data Catalog, Dictionary, Classification", "จัดทำ RACI + แผนสื่อสาร + รวบรวมผล Data Catalog และ Data Cleansing เป็นหลักฐาน", "จัดทำ Dashboard การใช้ Big Data + วัด Outcome + กำหนด Leading/Lagging Indicator", "นำ Outcome ทบทวนนโยบาย/คู่มือ Data Governance + จัดเก็บองค์ความรู้ลงระบบ KM"]},
+"5.1":{
+scopeNote:"ประเมินความสมบูรณ์ ISMS ครอบคลุม Policy Formulation, Standardization, Execution & Awareness, Value/Outcome Measurement และ Resilience & Continuous Improvement — กทท. เป็น Best Practice ในกลุ่ม (3.4000)",
+dimLevels:["Policy Formulation: มีเกราะป้องกันทางกฎหมายและระเบียบรองรับ","Standardization: ความครบถ้วนของคู่มือป้องกันภัยคุกคามไซเบอร์ตามมาตรฐานสากล","Execution & Awareness: พนักงานทุกคนรับรู้และไม่เป็นจุดอ่อน (Human Error)","Value/Outcome Measurement: ระบบที่ตั้งไว้ป้องกันความเสียหายได้จริง (วัดเป็น Outcome ไม่ใช่ Output)","Resilience & Continuous Improvement: เรียนรู้และปรับตัวจากภัยคุกคามใหม่ๆ อุดช่องโหว่ในอนาคต"],
+minReqs:{1:["นโยบาย ISMS และแนวปฏิบัติด้านความมั่นคงปลอดภัยที่อนุมัติโดยผู้บริหารระดับสูง"],2:["คู่มือ ISMS สอดคล้องกับ ISO/IEC 27001 และกฎหมาย (พ.ร.บ. ไซเบอร์ฯ)"],3:["RACI, รายงานสื่อสารนโยบาย, แบบประเมินการรับรู้","หลักฐาน Implementation: หลักฐานการตั้งค่าระบบความปลอดภัย, บันทึกเฝ้าระวังภัยคุกคาม, รายงานเหตุการณ์ความมั่นคงปลอดภัย"],4:["Dashboard หรือรายงานวัด Outcome ด้าน ISMS ที่มี Leading Indicator และ Lagging Indicator ชัดเจน"],5:["รายงานประชุมคณะกรรมการที่นำ Outcome เข้าสู่ Continuous Improvement + จัดเก็บเป็นองค์ความรู้ลงระบบ KM"]},
+integLinks:{2:["RM&IC"],3:["HCM"],4:["SP"],5:["KM"]},
+levelSumm:["จัดทำนโยบาย ISMS และแนวปฏิบัติ Cybersecurity + ขออนุมัติผู้บริหาร", "จัดทำคู่มือ ISMS สอดคล้อง ISO 27001 + ครอบคลุม พ.ร.บ. ไซเบอร์ฯ", "จัดทำ RACI + แผนสื่อสาร + รวบรวมหลักฐานระบบความปลอดภัย + บันทึกเฝ้าระวัง", "จัดทำ Dashboard ด้าน ISMS + กำหนด Leading Indicator และ Lagging Indicator", "นำ Outcome ทบทวนนโยบาย ISMS + จัดเก็บ Lesson Learned ลงระบบ KM"]},
+"5.2":{
+scopeNote:"ประเมินความสมบูรณ์กระบวนการบริหารความเสี่ยง ISMS ครอบคลุม Policy Alignment, Risk Process Completeness, Execution & Awareness, Risk Optimization/Outcome และ Continuous Improvement",
+dimLevels:["Policy Alignment: ตระหนักรู้และวางกรอบนโยบายความเสี่ยงด้าน IT","Risk Process Completeness: ความสมบูรณ์ของเครื่องมือประเมินความเสี่ยง","Execution & Awareness: นำกระบวนการไปใช้ค้นหาความเสี่ยงจริง คนหน้างานตระหนักรู้","Risk Optimization/Outcome: แผนจัดการความเสี่ยงลดระดับมาอยู่ใน Risk Appetite ที่ยอมรับได้","Continuous Improvement: เมื่อมีภัยคุกคามรูปแบบใหม่ ปรับปรุงเครื่องมือประเมินความเสี่ยงได้ทันที"],
+minReqs:{1:["นโยบาย ISMS Risk Management ที่สอดคล้องกับนโยบายบริหารความเสี่ยงภาพรวมองค์กร"],2:["คู่มือ Cyber Risk Assessment: Identify > Assess > Mitigate > Monitor โดยอิงมาตรฐานสากล"],3:["RACI, แผนสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: Risk Register ด้านไซเบอร์ที่มี Mitigation Plan อนุมัติโดยผู้บริหารและใช้งานจริง"],4:["Dashboard/รายงานวัดผล Outcome ของการจัดการความเสี่ยง ที่มี Leading/Lagging Indicator"],5:["รายงานประชุมคณะกรรมการที่นำ Outcome ทบทวนปรับปรุงกระบวนการ + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["RM&IC"],3:["RM&IC"],4:["SP","RM&IC"],5:["KM","คณะกรรมการบริหารความเสี่ยง"]},
+levelSumm:["จัดทำนโยบาย ISMS Risk Management + สอดคล้องกับนโยบายบริหารความเสี่ยงองค์กร", "จัดทำคู่มือ Cyber Risk Assessment + กระบวนการ Identify, Assess, Mitigate, Monitor", "จัดทำ RACI + แผนสื่อสาร + จัดทำ Risk Register ด้านไซเบอร์พร้อม Mitigation Plan", "จัดทำ Dashboard Risk Indicators + กำหนด Leading/Lagging Indicator", "นำ Outcome ทบทวนกระบวนการจัดการความเสี่ยง + จัดเก็บลงระบบ KM"]},
+"5.3":{
+scopeNote:"ประเมินความสมบูรณ์ ISMS Audit ครอบคลุม Audit Framework, Audit Process & Tools, Execution & Independence, Value Realization และ Continuous Improvement",
+dimLevels:["Audit Framework: มีกรอบเกณฑ์การตรวจสอบที่ชัดเจนและเป็นทางการ","Audit Process & Tools: ความครบถ้วนของเครื่องมือและขั้นตอนตามมาตรฐานวิชาชีพ","Execution & Independence: ลงมือตรวจสอบจริงด้วยความเป็นอิสระ","Value Realization: การตรวจสอบต้องช่วยป้องกันความเสี่ยงและลดความเสียหายได้จริง (Value Add)","Continuous Improvement: นำข้อเสนอแนะไปพัฒนากระบวนการและอุดช่องโหว่อย่างยั่งยืน"],
+minReqs:{1:["นโยบายและกรอบแนวทาง ISMS Audit ที่อนุมัติโดยผู้บริหาร/คณะกรรมการตรวจสอบ"],2:["คู่มือ ISMS Audit Manual: Audit Plan, Execution, Reporting, Follow-up โดยอิง ISO 27001 หรือแนวปฏิบัติ IA"],3:["RACI, รายงานสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: รายงาน ISMS Audit ประจำปีที่เสร็จสิ้นจริง ส่งรายงานให้ผู้บริหาร/คณะกรรมการตรวจสอบ"],4:["Dashboard/รายงานวัดผล Outcome ของ ISMS Audit ที่มี Leading/Lagging Indicator"],5:["รายงาน AAR หรือรายงานประชุมคณะกรรมการที่นำ Audit Findings ทบทวนปรับปรุงคู่มือ/นโยบาย + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["IA"],3:["IA","RM&IC"],4:["SP"],5:["คณะกรรมการตรวจสอบ","KM"]},
+levelSumm:["จัดทำนโยบาย/Framework ISMS Audit + ขออนุมัติคณะกรรมการตรวจสอบ", "จัดทำคู่มือ ISMS Audit Manual + ครอบคลุม Audit Plan, Execution, Reporting, Follow-up", "จัดทำ RACI + แผนสื่อสาร + ดำเนินการ ISMS Audit ประจำปีและรายงานผล", "จัดทำ Dashboard ผล Audit + กำหนด Leading/Lagging Indicator", "นำ Audit Findings ทบทวนคู่มือ/นโยบาย ISMS + จัดเก็บลงระบบ KM"]},
+"6.1":{
+scopeNote:"ประเมินความสมบูรณ์ IT Asset Management ครอบคลุม Policy ความครบถ้วนวงจรชีวิตทรัพย์สิน (Lifecycle) การใช้ ITSM (Execution) การวัดความคุ้มค่า (Asset Optimization) และการพยากรณ์อนาคต (Future Planning)",
+dimLevels:["Policy: มีแนวทางควบคุมทรัพย์สิน IT ไม่ให้สูญหายหรือเป็นช่องโหว่","Lifecycle Completeness: ครบ In > Maintain > Out ไร้รอยต่อ","Execution & System Usage: ใช้ระบบดิจิทัล (ITSM) ในการติดตามทรัพย์สินแทนกระดาษหรือ Excel","Value Realization/Asset Optimization: ทรัพย์สิน IT ถูกใช้งานอย่างเต็มประสิทธิภาพและคุ้มทุน","Future Planning: รู้ล่วงหน้าว่าอะไรจะ EOL/EOS และตั้งงบรอไว้"],
+minReqs:{1:["นโยบาย IT Asset Management ที่อ้างอิงกับนโยบาย Cybersecurity ขององค์กร"],2:["คู่มือบริหาร IT Asset ครอบคลุมวงจรชีวิตบังคับ 5 ข้อ: 1) ทะเบียนทรัพย์สิน 2) ปรับปรุงทะเบียน 3) ยกเลิก/เรียกคืน 4) บำรุงรักษา 5) EOL/EOS Planning"],3:["RACI, แผนสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: หน้าจอ ITSM ที่บันทึกสถานะทรัพย์สินจริง, รายงานผลบำรุงรักษา (PM), ใบตรวจรับพัสดุ"],4:["Dashboard/รายงานวัดผล Outcome ของ IT Asset Management ที่มี Leading/Lagging Indicator"],5:["รายงานทบทวนแผนดิจิทัลที่นำ Outcome มาจัดทำแผน + หลักฐานการจัดเก็บลงระบบ KM"]},
+integLinks:{2:["บัญชีการเงิน","SCM (พัสดุ)"],3:["SP (งบประมาณ)"],4:["SP"],5:["RM&IC","KM"]},
+levelSumm:["จัดทำนโยบาย IT Asset Management + อิงกับนโยบาย Cybersecurity องค์กร", "จัดทำคู่มือ IT Asset ครอบคลุม 5 วงจรชีวิต: ทะเบียน, ปรับปรุง, ยกเลิก, บำรุงรักษา, EOL/EOS", "จัดทำ RACI + แผนสื่อสาร + รวบรวมหน้าจอ ITSM + รายงาน PM + ใบตรวจรับพัสดุ", "จัดทำ Dashboard IT Asset + กำหนด Leading/Lagging Indicator", "นำ Outcome ทบทวนแผนดิจิทัล + จัดเก็บแผนอนาคตลงระบบ KM"]},
+"6.2":{
+scopeNote:"ประเมินความสมบูรณ์ Configuration Management ครอบคลุม Policy ความครบถ้วน Baseline & Version Control (Process) การใช้เครื่องมืออัตโนมัติ ITSM/PRTG (Execution) การลดข้อผิดพลาด Config (Value Realization) และการวางแผนอนาคต (Agility)",
+dimLevels:["Policy: ควบคุมการตั้งค่าระบบ ไม่ให้พนักงานเปลี่ยน Config โดยพลการ","Process & Standardization: ครบถ้วนทั้ง Minimum Baseline Standard และ System Configuration Version Control","Execution & Tool Usage: ใช้เครื่องมืออัตโนมัติ (ITSM, PRTG) มอนิเตอร์และผูกความสัมพันธ์ CI","Value Realization: วัดว่าระบบ Config ช่วยลด Downtime ที่เกิดจาก Human Error ได้อย่างไร","Agility & Planning: นำข้อมูล Config วิเคราะห์ Capacity วางแผนจัดซื้อหรือขยายระบบในอนาคต"],
+minReqs:{1:["นโยบาย Configuration Management ที่ได้รับอนุมัติ พร้อมกำหนดบทบาทหน้าที่ชัดเจน"],2:["คู่มือ Configuration Management: Minimum Baseline Standard, System Configuration Version Control และการเชื่อมโยงกับ Change Management & Capacity Management"],3:["เอกสาร Stakeholder, แผนสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: หน้าจอ ITSM (CI Relation), ระบบ PRTG Monitor และ Change Request Form ที่ใช้งานจริง"],4:["Dashboard/รายงานวัดผล Outcome ที่มี Leading/Lagging Indicator ครบถ้วน"],5:["รายงานประชุมทบทวนที่นำข้อมูลไปปรับปรุงแผนดิจิทัลระยะยาว + จัดเก็บองค์ความรู้ลงระบบ KM"]},
+integLinks:{2:["DT ข้อ 6.1 (IT Asset)","DT ข้อ 5.1 (ISMS)"],3:["IA"],4:["SP"],5:["SP"]},
+levelSumm:["จัดทำนโยบาย Configuration Management + กำหนดบทบาทหน้าที่", "จัดทำคู่มือ Config Management + Minimum Baseline Standard + Version Control", "จัดทำ RACI + แผนสื่อสาร + รวบรวมหน้าจอ ITSM CI Relation + PRTG + Change Request", "จัดทำ Dashboard Config KPI + กำหนด Leading/Lagging Indicator", "นำข้อมูล Config ทบทวนแผนดิจิทัลระยะยาว + จัดเก็บองค์ความรู้"]},
+"6.3":{
+scopeNote:"ประเมินความสมบูรณ์ IT Incident, Service Request และ Problem Management ครอบคลุม Policy (ช่องทางรับแจ้ง) SLA & Severity (Process) การใช้ ITSM จริง (Execution) First Call Resolution (Value Realization) และ Problem Management (Root Cause)",
+dimLevels:["Policy: มีช่องทางและแนวทางที่เป็นทางการในการรับแจ้งปัญหา IT","Process & SLA: การคัดกรองปัญหา — ด่วน/ไม่ด่วน ต้องมีเกณฑ์ชัดเจน ผูกกับ Business Continuity","Execution & System Usage: ต้องไม่รับแจ้งปัญหาผ่านไลน์ส่วนตัว แต่ต้องวิ่งเข้าระบบ ITSM (Single Point of Contact)","Value Realization: วัดว่าแก้ปัญหาได้เร็วและลดผลกระทบต่อธุรกิจได้อย่างไร (First Call Resolution)","Problem Management: จัดการ 'รากเหง้า' ของปัญหา — ไม่ใช่แค่ซ่อมอาการ แต่ต้องป้องกันไม่ให้เกิดซ้ำ"],
+minReqs:{1:["นโยบาย/แนวทาง IT Incident & Service Request Management ที่ได้รับอนุมัติ"],2:["คู่มือครอบคลุม: Categorization & Severity Level, Escalation Process, กรอบเวลาแก้ไขปัญหา (ผูกกับ RTO/MTPD), IT Contingency Plan และ DRP"],3:["RACI, แผนสื่อสาร, ผลประเมินการรับรู้ผู้ใช้งาน","หลักฐาน Implementation: หน้าจอ ITSM ที่มีข้อมูล Ticket จริงๆ, บันทึกประเมินความพึงพอใจ และ Escalation Log"],4:["Dashboard/รายงานวัดผล Outcome ที่มี Leading/Lagging Indicator ชัดเจน"],5:["รายงาน Root Cause Analysis (RCA) นำไปสู่การปรับปรุงแผนดิจิทัล + หลักฐานจัดเก็บ Knowledge Base ลงระบบ ITSM"]},
+integLinks:{2:["DT ข้อ 6.4 (BCP)","RM&IC"],3:["SCM (ผลสำรวจความพึงพอใจ)"],4:["SP"],5:["KM","RM&IC"]},
+levelSumm:["จัดทำนโยบาย IT Incident & Service Request Management + ขออนุมัติ", "จัดทำคู่มือ: Categorization, Severity Level, Escalation, SLA (ผูก RTO/MTPD), DRP", "จัดทำ RACI + แผนสื่อสาร + รวบรวม ITSM Ticket, ผลความพึงพอใจ, Escalation Log", "จัดทำ ITSM Dashboard + กำหนด Leading/Lagging Indicator", "จัดทำ Root Cause Analysis + ปรับปรุงแผนดิจิทัล + จัดเก็บ Knowledge Base ลงระบบ"]},
+"6.4":{
+scopeNote:"ประเมินความสมบูรณ์ Business Continuity Management (BCM) ครอบคลุม Policy (เตรียมพร้อมรับมือวิกฤต) BIA Completeness (Process) ความพร้อมจริงผ่านการซ้อม (Execution) Value Protection (Value Realization) และ Resilience & Continuous Improvement",
+dimLevels:["Policy: ตระหนักรู้และเตรียมพร้อมรับมือวิกฤตขององค์กร","Process & BIA Completeness: BIA ต้องตอบได้ว่าถ้าระบบ A ล่ม จะสูญเสียเงินหรือเสียชื่อเสียงเท่าไร เพื่อกำหนด RTO ที่เหมาะสม","Execution & Readiness: แผนบนกระดาษไม่มีประโยชน์ถ้าพนักงานและ Vendor ไม่เคยซ้อมปฏิบัติจริง","Value Realization: วัดว่าแผน BCP ช่วยปกป้องมูลค่าทางธุรกิจ (Value Protection) ได้อย่างไรเมื่อเกิดเหตุฉุกเฉิน","Resilience & Continuous Improvement: นำจุดบกพร่องตอนซ้อมมาอุดช่องโหว่ไม่ให้เกิดซ้ำ"],
+minReqs:{1:["นโยบาย/แผน IT BCP และ DRP ที่สอดคล้องกับนโยบายระดับองค์กร อนุมัติโดยคณะกรรมการ"],2:["คู่มือครอบคลุม 8 องค์ประกอบบังคับ: 1) Risk Analysis 2) BIA 3) จัดลำดับความสำคัญระบบ 4) กลยุทธ์ IT BCP 5) MTPD, RTO และ RPO 6) จัดทำ IT BCP/DRP 7) สื่อสารและฝึกอบรม 8) ทดสอบและทบทวนแผน (IT BCP Drill)"],3:["RACI, แผนสื่อสาร, ผลประเมินการรับรู้","หลักฐาน Implementation: รายงานสรุปผล 'การซ้อมแผนฉุกเฉิน (BCP/DRP Drill)' ประจำปีที่เกิดขึ้นจริง พร้อมภาพถ่ายและ Log การกู้คืนระบบ"],4:["Dashboard/รายงานวัดผล Outcome ของ BCM ที่มี Leading/Lagging Indicator"],5:["รายงาน AAR หลังซ้อมแผน + รายงานประชุมคณะกรรมการที่นำข้อค้นพบไปปรับปรุงแผน IT BCP + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["RM&IC"],3:["HCM","SCM"],4:["SP"],5:["คณะกรรมการบริหารความเสี่ยง","KM"]},
+levelSumm:["จัดทำนโยบาย IT BCP และ DRP + สอดคล้องนโยบายระดับองค์กร + ขออนุมัติคณะกรรมการ", "จัดทำคู่มือ BCP ครอบคลุม 8 องค์ประกอบ: Risk Analysis, BIA, ลำดับระบบ, กลยุทธ์, MTPD/RTO/RPO, BCP/DRP, อบรม, ทดสอบ", "จัดทำ RACI + แผนสื่อสาร + ซ้อมแผน BCP/DRP ประจำปี + รวบรวม Log การกู้คืน", "จัดทำ Dashboard BCM + กำหนด Leading/Lagging Indicator", "จัดทำ AAR หลังซ้อมแผน + นำข้อค้นพบปรับปรุง IT BCP + จัดเก็บลงระบบ KM"]},
+"7.1":{
+scopeNote:"ประเมินความสมบูรณ์กระบวนการบริหารทรัพยากร DT ครอบคลุม Policy (ลดความซ้ำซ้อน) Categorization & Standardization (Process) การรีดประสิทธิภาพจากทรัพยากรที่มีอยู่ (Execution) การวัดมูลค่าทางการเงิน (Value Realization) และการนำผลประเมินปรับโมเดลการลงทุน IT",
+dimLevels:["Policy: มีแนวทางลดความซ้ำซ้อนและลดความสิ้นเปลืองในการจัดซื้อเทคโนโลยี","Categorization & Standardization: เกณฑ์การจัดสรรทรัพยากรชัดเจน (End User, Departmental, Enterprise Computing)","Execution & Optimization: แสดงให้เห็นว่ามีการ 'รีดประสิทธิภาพ' จากทรัพยากรที่มีอยู่ให้คุ้มค่าสูงสุด ไม่ใช่เอะอะก็ตั้งงบซื้อใหม่","Value Realization: วัดมูลค่าทางการเงินที่ประหยัดได้ (Cost Saving) หรือ ROI ที่คุ้มค่า","Continuous Improvement: นำผลประเมินมาปรับโมเดลการลงทุน IT เช่น เปลี่ยนจาก CAPEX เป็น OPEX/Cloud"],
+minReqs:{1:["นโยบายหรือแนวทางบริหารจัดการการใช้ทรัพยากร DT อย่างเหมาะสม"],2:["คู่มือและระเบียบวิธีปฏิบัติในการจัดสรรทรัพยากร: End User Computing, Departmental Computing และ Enterprise Computing (Data Center, Network, Cloud & Outsourcing, Software Architecture)"],3:["RACI, แผนสื่อสาร, รายงานประเมินประสิทธิภาพการสื่อสาร","หลักฐาน Implementation: แฟ้มสรุปโครงการที่แสดงการรวบศูนย์ทรัพยากร เช่น โครงการลด Server ด้วย Virtualization หรือรายงานปรับลดโควต้าเครื่องพิมพ์/กระดาษ"],4:["Dashboard/รายงานวัดผล Outcome ของการใช้ทรัพยากร ที่มี Leading/Lagging Indicator ชัดเจน"],5:["รายงานประชุมคณะกรรมการที่นำผลลัพธ์การประหยัดทรัพยากรทบทวนแผน IT ในอนาคต + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["SP","SCM (พัสดุ)"],3:["ทุกฝ่ายงาน (End User)"],4:["SP"],5:["KM","IM (นวัตกรรม)"]},
+levelSumm:["จัดทำนโยบายบริหารจัดการทรัพยากร DT อย่างเหมาะสม", "จัดทำคู่มือจัดสรรทรัพยากร: End User, Departmental, Enterprise Computing (Cloud, Network, Software)", "จัดทำ RACI + แผนสื่อสาร + รวบรวมหลักฐาน Consolidation โครงการลดทรัพยากรซ้ำซ้อน", "จัดทำ Dashboard วัด Outcome + กำหนด Leading/Lagging Indicator", "นำผลประหยัดทรัพยากรทบทวนแผน IT + จัดเก็บลงระบบ KM"]},
+"7.2":{
+scopeNote:"ประเมินความสมบูรณ์กระบวนการ Green IT ครอบคลุม Policy (ครบ 4 องค์ประกอบ) กระบวนการตลอดวงจรชีวิตอุปกรณ์ (Lifecycle & Process) การลงมือปฏิบัติจริง (Execution & Awareness) การวัดผลกระทบต่อสิ่งแวดล้อม (Environmental Value) และ Sustainable Innovation",
+dimLevels:["Policy: ผู้บริหารประกาศชัดเจนว่า IT ต้องช่วยรักษ์โลก","Lifecycle & Process: ครบตั้งแต่ต้นน้ำ (จัดซื้อประหยัดพลังงาน) ถึงปลายน้ำ (กำจัด E-Waste อย่างถูกวิธี)","Execution & Awareness: พนักงานตระหนักรู้ และฝ่าย IT จัดซื้อ/กำจัดอุปกรณ์ตามระเบียบ Green IT จริง","Environmental Value: วัดผลกระทบต่อสิ่งแวดล้อมที่ลดลง เช่น Carbon Footprint หรือประหยัดพลังงานไฟฟ้า","Sustainable Innovation: นำเทคโนโลยีใหม่ (IoT, AI) มาต่อยอดเป็นนวัตกรรมเพื่อสิ่งแวดล้อม"],
+minReqs:{1:["นโยบาย Green IT ที่ได้รับอนุมัติ"],2:["คู่มือ Green IT ครอบคลุม 4 องค์ประกอบบังคับ: วัฏจักรอุปกรณ์ (Procurement > Recycle/Reuse > Disposal), End User Computing, Enterprise Computing และ ICT as Low-Carbon Enabler"],3:["เอกสาร Stakeholder, แผนสื่อสาร, ผลประเมินประสิทธิภาพการสื่อสาร","หลักฐาน Implementation: ใบสั่งซื้อ/TOR ที่บังคับซื้ออุปกรณ์เป็นมิตรต่อสิ่งแวดล้อม, ใบรับรองการกำจัด E-Waste จากโรงงานที่ได้มาตรฐาน หรือรายงาน Paperless"],4:["Dashboard/รายงานวัดผล Outcome ด้านสิ่งแวดล้อม ที่มี Leading/Lagging Indicator"],5:["รายงาน AAR หรือรายงานมติประชุมที่นำผลการประหยัดพลังงานปรับปรุงแผนวิสาหกิจ/แผนดิจิทัล + จัดเก็บลงระบบ KM"]},
+integLinks:{2:["SP (แผนแม่บทสิ่งแวดล้อม)","SCM (จัดซื้อ)"],3:["HR","SCM (คู่ค้า/Vendor)"],4:["SP"],5:["IM (นวัตกรรม)"]},
+levelSumm:["จัดทำนโยบาย Green IT + ขออนุมัติผู้บริหาร", "จัดทำคู่มือ Green IT ครอบคลุม 4 ด้าน: Equipment Lifecycle, End User, Enterprise, ICT as Low-Carbon", "จัดทำ RACI + แผนสื่อสาร + รวบรวม TOR Green Procurement + ใบรับรอง E-Waste", "จัดทำ Dashboard Green IT + วัด Outcome Carbon/Energy + กำหนด Leading/Lagging Indicator", "นำผลการประหยัดพลังงานปรับปรุงแผนวิสาหกิจ/ดิจิทัล + จัดเก็บลงระบบ KM"]}
+};
+
+// ── subComps (จุดดักคะแนน) patch ──
+  if(h("1.1")) h("1.1").subComps={"2": ["มิติคน: เกณฑ์บังคับให้มีนโยบายพัฒนาทักษะด้านดิจิทัลของบุคลากรและวัฒนธรรมดิจิทัล — ต้องเชื่อมกับ HCM", "มิติกฎหมาย: ซ่อนเรื่อง PDPA และ พ.ร.บ. ไซเบอร์ ในหัวข้อ 'ความโปร่งใส/ข้อกำหนดทางกฎหมาย'", "มิติ EA: ต้องกำหนด 'หลักเกณฑ์สำหรับจัดทำ EA' ก่อนจะไปทำจริงในข้อ DT 2.1"], "3": ["มิติ Value Chain: การวิเคราะห์ผู้มีส่วนได้ส่วนเสียต้องวิเคราะห์ตลอดสายห่วงโซ่คุณค่า — เชื่อมโยง SCM"], "4": ["มิติ Business Value: ตัวชี้วัด Outcome ต้องสะท้อนการลดต้นทุน เพิ่มรายได้ หรือเพิ่มขีดความสามารถ (เชื่อม SP)"]};
+  if(h("1.2")) h("1.2").subComps={"2": ["ความเสี่ยง: การจัดทำแผนดิจิทัลต้องมีการวิเคราะห์ความเสี่ยงของแผนงาน (Project Risk) ก่อนเสมอ", "มิติคน (HRM/HRD): แผน IT จะสำเร็จได้ต้องมีกระบวนการประเมินว่าองค์กรมีบุคลากรที่มีทักษะเพียงพอ — Digital Literacy / Upskill/Reskill"], "3": ["มิติคน: ต้องซ่อนเรื่อง Digital Literacy หรือแผน Upskill/Reskill บุคลากรไว้ในส่วนหนึ่งของแผนดิจิทัลด้วย"], "4": ["มิติสัญญาณเตือนภัย: ต้องมีการตั้ง Trigger Point หรือ Early Warning System (EWS) ที่ผูกกับ Leading Indicator"], "5": ["มิติ EWS: ต้องมีกลไกตรวจจับสัญญาณเตือนเมื่อแผนมีแนวโน้มว่าจะไม่บรรลุเป้าหมาย ก่อนที่จะสายเกินไป"]};
+  if(h("2.1")) h("2.1").subComps={"2": ["จุดเริ่มต้นที่ถูกต้อง: EA ต้องเริ่มจากยุทธศาสตร์ ไม่ใช่จากโปรเจกต์ — Business Architecture ต้องตั้งต้นจาก Work System และ Key Work Process จาก SP ฝ่ายยุทธศาสตร์", "กับดัก PPT: แผน Digital Transformation ตกม้าตายเพราะเขียนแค่ว่าจะซื้อ 'ระบบ (Technology)' ใหม่ แต่ต้องมีแผน 'บุคลากร (People)' และ 'ปรับกระบวนการ (Process)' ควบคู่เสมอ"], "4": ["End-to-End Process: ตัวชี้วัดของ EA ต้องสะท้อนการปรับปรุงงานแบบ 'ไร้รอยต่อ (End-to-End)' ตั้งแต่ต้นน้ำยันปลายน้ำ ไม่ใช่วัดแค่แผนกใดแผนกหนึ่ง"]};
+  if(h("2.2")) h("2.2").subComps={"2": ["EA Checkpoint: ในขั้นตอนริเริ่มโครงการต้องมีฟอร์มระบุว่า 'โครงการนี้สอดคล้องกับกรอบ EA (DT 2.1)' — นี่คือจุดพิสูจน์ Implementation ของ 2.1 ด้วย"], "3": ["Change Management: เวลาระบบใหม่จะขึ้น (Go-live) ต้องมีแผน Change Management รวมถึงการอบรม (Training) ให้พนักงานใช้งานระบบ — งานของ HR"], "4": ["Post-Implementation Review: การวัดผล Outcome ไม่สามารถวัดได้ทันทีที่ส่งมอบงาน แต่ต้องวัดหลังจากใช้งานไประยะหนึ่ง (เช่น 3-6 เดือน)"]};
+  if(h("2.3")) h("2.3").subComps={"2": ["Audit Independence: แม้เป็นงานของสายงาน IT แต่การกำหนดคู่มือ Digital/Computer Audit ถูกระบุว่าเป็นหน้าที่ของฝ่ายตรวจสอบ — ต้องสอดคล้องกับเกณฑ์ IA ด้วย"], "3": ["Change & Release Management: กระบวนการตรวจสอบคุณภาพเกี่ยวพันกับการนำระบบขึ้นใช้งาน (Go-Live) — หากระบบไม่ผ่าน QMS จะไม่สามารถ Release ได้ (เชื่อมกับข้อ 6.2 Configuration Management)"], "4": ["SLA & Vendor Management: ตัวชี้วัดคุณภาพส่วนใหญ่มักผูกกับ SLA ที่ทำไว้กับ Vendor — การวัดคุณภาพจึงซ่อนเรื่องการบริหารสัญญาผู้ส่งมอบอยู่ด้วย"]};
+  if(h("3.1")) h("3.1").subComps={"2": ["PDPA & Cybersecurity: การแลกเปลี่ยนข้อมูลกับภายนอกซ่อนข้อบังคับตาม PDPA และ พ.ร.บ. ไซเบอร์ฯ — หากแบบฟอร์มขอเชื่อมข้อมูลไม่มีเรื่องนี้ จะถูกมองว่ากระบวนการมีความเสี่ยง", "Resource Optimization: เกณฑ์กำหนดให้ต้องมี 'การทบทวนแผนงาน/โครงการที่มีความซ้ำซ้อน' — เชื่อมโยงกับการประหยัดงบประมาณ (DT 7.1)"], "4": ["One-Stop Service: เป้าหมายสูงสุดของ Government Integration คือบริการภาครัฐแบบครบวงจร ณ จุดเดียว (Citizen-centric) — ตัวชี้วัดต้องสะท้อนว่าลูกค้า กทท. ไม่ต้องยื่นเอกสารซ้ำซ้อนหลายหน่วยงาน"]};
+  if(h("4.1")) h("4.1").subComps={"2": ["PDPA & Data Security: การจัดชั้นความลับข้อมูล (Data Classification) เชื่อมโยงกับ PDPA และ พ.ร.บ. ไซเบอร์ฯ (DT 5) อย่างแยกไม่ออก — คู่มือด้านข้อมูลต้องอ้างอิงระดับความปลอดภัยจากคู่มือด้าน Security ด้วย"], "3": ["Government Integration: การจะแลกเปลี่ยนข้อมูลกับภายนอก (DT 3.1) ต้องผ่านกระบวนการ Data Governance ก่อนเสมอ เพื่อให้มั่นใจว่าข้อมูลที่ส่งออกมีมาตรฐาน (Data Dictionary ตรงกัน)"], "4": ["Customer-Centric Innovation: Big Data จะทรงพลังเมื่อถูกนำไปเชื่อมกับ SCM และ IM — เกณฑ์คาดหวังให้นำ Big Data ไปวิเคราะห์สร้างนวัตกรรมบริการใหม่ๆ ให้ลูกค้า"]};
+  if(h("5.1")) h("5.1").subComps={"3": ["ประสิทธิภาพการสื่อสาร: TRIS เน้นว่าต้องวัดว่า 'คะแนนความเข้าใจ (Awareness Score) ผ่านเกณฑ์กี่เปอร์เซ็นต์' — ไม่ใช่แค่วัดว่ามีคนเข้าอบรมกี่คน"], "4": ["Risk-Based Approach: ตัวชี้วัด ISMS ต้องตอบโจทย์ 'ความเสี่ยงด้าน Digital Risk Optimization' — TRIS มองหาตัวชี้วัดที่สะท้อนการลดความเสี่ยง ไม่ใช่การนับจำนวนกิจกรรม"]};
+  if(h("5.2")) h("5.2").subComps={"2": ["Risk Appetite & Tolerance: การบอกว่าความเสี่ยงสูงหรือต่ำ ต้องใช้เกณฑ์ระดับองค์กร — Risk Appetite ของฝ่าย IT ต้องสอดคล้องกับเป้าหมายองค์กร (Business Objective)"], "3": ["Incident Data as Input: การระบุความเสี่ยงด้าน IT ต้องนำข้อมูลจากข้อ 6.3 (Incident Management) มาเป็นปัจจัยนำเข้าในการประเมินความเสี่ยงปีถัดไปด้วย"], "4": ["Value Protection: การจัดการความเสี่ยงไซเบอร์ที่ดีซ่อนเรื่อง 'Value Protection' — ต้องมั่นใจว่าข้อมูลลูกค้าไม่รั่วไหลและธุรกิจเดินต่อได้"]};
+  if(h("5.3")) h("5.3").subComps={"2": ["Compliance Check: การตรวจสอบ ISMS ไม่ได้ตรวจแค่ระบบทางเทคนิค แต่ซ่อนการตรวจสอบ 'ความสอดคล้องทางกฎหมาย (Compliance)' เช่น PDPA และ พ.ร.บ. ไซเบอร์ฯ ด้วย"], "3": ["Consulting Services: เกณฑ์ SE-AM คาดหวังให้ผู้ตรวจสอบทำหน้าที่เป็น 'ผู้ให้คำปรึกษา (Consulting)' ด้วย — รายงานตรวจสอบต้องมีข้อเสนอแนะเชิงกลยุทธ์ ไม่ใช่แค่ข้อบกพร่อง"]};
+  if(h("6.1")) h("6.1").subComps={"2": ["Financial Alignment: การจัดการ IT Asset ต้องอิงกับระเบียบบัญชีและพัสดุขององค์กร — ฝ่าย IT ไม่สามารถตั้งกฎการเสื่อมราคาหรือการแทงจำหน่ายเองได้", "Cybersecurity Risk: เครื่องที่ EOL/EOS เช่น Windows รุ่นเก่า หากหลุดรอดอยู่ในเครือข่ายจะกลายเป็นช่องโหว่ทันที — เชื่อมกับ DT 5 (ISMS)"]};
+  if(h("6.2")) h("6.2").subComps={"2": ["CI Relationship Hub: CI 1 ตัวต้องบอกได้ว่าเชื่อมอยู่กับทรัพย์สินใด (Asset-6.1) มีปัญหาอะไร (Incident-6.3) และมีความเสี่ยงไซเบอร์อะไร (Security-5.1)"], "3": ["Audit Log: ระบบ PRTG และ ITSM ต้องสามารถออก Audit Log ให้ฝ่ายตรวจสอบ (IA) ดูได้ว่า 'ใครเป็นคนเปลี่ยน Config ตอนกี่โมง'"]};
+  if(h("6.3")) h("6.3").subComps={"2": ["SLA ต้องดึงจาก BCP: กรอบเวลาแก้ไขปัญหา (SLA) ห้ามคิดขึ้นเอง — ต้องดึงค่า RTO และ MTPD มาจากข้อ 6.4 (Business Continuity)"], "3": ["Vendor/Outsource: หากปัญหาถูกส่งต่อให้ Outsource แก้ไข ฝ่าย DT ต้องมีกระบวนการประเมินผู้รับจ้าง (ใบตรวจรับการทำงาน)"], "5": ["Problem vs Incident: การแก้เซิร์ฟเวอร์ค้างด้วยการ Restart คือ Incident (L3) แต่การหาสาเหตุว่าทำไมถึงค้างแล้วแก้บั๊กไม่ให้ค้างอีก คือ Problem Management (L5) — เกณฑ์ซ่อนการจัดการ 2 ระดับนี้ไว้ด้วยกัน"]};
+  if(h("6.4")) h("6.4").subComps={"2": ["Corporate RM Alignment: ค่า MTPD ต้องดึงมาจากแผน BCM ระดับองค์กร (RM&IC) — ไม่ใช่กำหนดเองตามใจ กทท. ตั้ง MTPD 48 ชั่วโมง ซึ่งถูกต้องแล้ว"], "3": ["Vendor's BCP: หากระบบสำคัญ (CTMS, ERP) มี Vendor ดูแลร่วม ในการซ้อมแผนต้องซ้อมร่วมกับ Vendor และประเมิน SLA ของ Vendor ว่ากู้ระบบทัน RTO หรือไม่"]};
+  if(h("7.1")) h("7.1").subComps={"2": ["EA & IT Asset Link: Resource Optimization จะทำไม่ได้เลยถ้าไม่มีรากฐานจาก EA (DT 2.1) ที่บอกว่ามีระบบอะไรซ้ำซ้อน และทะเบียนทรัพย์สิน (DT 6.1) ที่บอกว่ามีเครื่องมืออะไรเหลืออยู่"], "3": ["Cloud-First Policy: เกณฑ์ สคร. มุ่งหวังให้พิจารณาใช้บริการ Cloud Service ก่อนการลงทุนสร้าง Data Center ของตัวเอง — เพื่อลดภาระการบำรุงรักษา"], "4": ["TCO - Total Cost of Ownership: การวัดผลความคุ้มค่าต้องครอบคลุมค่าไฟ ค่าซ่อม ค่าลิขสิทธิ์ซอฟต์แวร์ตลอดอายุการใช้งาน ไม่ใช่วัดแค่ราคาตอนซื้อ (Purchasing Cost)"]};
+  if(h("7.2")) h("7.2").subComps={"2": ["การกำจัด E-Waste: เชื่อมโยงโดยตรงกับ DT 6.1 (IT Asset) ในส่วนของ End of Life — ต้องมีกระบวนการทำลายข้อมูล (Data Wiping - เชื่อม DT 5.1 Security) และส่งให้โรงงานกำจัดขยะอันตราย"], "4": ["Paperless Transformation: Green IT ครอบคลุมถึง 'การใช้ IT เป็นเครื่องมือลดขยะขององค์กร' เช่น e-Document, e-Signature ซึ่งช่วยลดการใช้กระดาษและหมึกพิมพ์ได้มหาศาล"]};
+
+Object.keys(D).forEach(function(id){
+  var s=h(id);
+  if(!s)return;
+  Object.assign(s,D[id]);
+});
+})();
+</script>
+</body>
+</html>
